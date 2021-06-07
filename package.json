@@ -1,0 +1,8 @@
+{
+  "name": "particles",
+  "version": "1.0.0",
+  "description": "Simple web components",
+  "main": "index.js",
+  "author": "David Linke",
+  "license": "MIT"
+}
