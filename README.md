@@ -1,2 +1,2 @@
 # particles
-a minimal ES6 web component library/framework
+a minimal ES6 web component library

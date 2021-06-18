@@ -1,9 +1,9 @@
 import Particle from '../ptc/ptc.js'
 
-import styles from './ptc-button.css.js';
-import template from './ptc-button.html.js';
+import styles from './ptc-card.css.js';
+import template from './ptc-card.html.js';
 
-class ParticleButton extends Particle {
+class ParticleCard extends Particle {
     constructor() {
         super();
         const props = {
@@ -14,7 +14,7 @@ class ParticleButton extends Particle {
                 {
                     name: 'variant',
                     defaultValue: 'regular',
-                    type: 'string',
+                    validator: (value) => { return ['regular', 'flat'].includes(value) },
                     observe: true
                 }
             ]
@@ -23,4 +23,4 @@ class ParticleButton extends Particle {
     }
 }
 
-export default ParticleButton;
+export default ParticleCard;
