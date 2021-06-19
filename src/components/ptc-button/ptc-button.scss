@@ -1,18 +1,23 @@
-:host{
-    background-color: var(--p-button--default__bgcolor, var(--p-cta__color-primary-idle, rgb(94, 8, 128)));
-    padding:0.5rem 1.25rem;
-    color: var(--p-button--default__textcolor, var(--p-cta__color-secondary-idle, #fff));
-    border-radius: var(
-        --p-button--default__border-radius, 
-        var(--p-cta__border-radius, 2px)
+@import "../ptc/ptc";
+
+:host {
+    @include ptc-base(
+        "ptc-button",
+        "idle",
+        var(--p-cta__color-primary--idle, rgb(94, 8, 128)),
+        var(--p-cta__color-secondary--idle, #fff),
+        var(--p-cta__border-radius, 2px),
+        var(--p-cta__padding, 0.5rem 1.25rem),
+        var(--p-cta__margin, 0)
     );
-    cursor:pointer;
+    cursor: pointer;
 }
-@media(hover:hover){
-    :host(:hover){
-        background-color: var(
-            --p-button--hover__bgcolor, 
-            var(--p-cta__color-primary-hover, rgb(144, 26, 190))
+@media (hover: hover) {
+    :host(:hover) {
+        @include ptc-base(
+            "ptc-button", 
+            "hover", 
+            var(--p-cta__color-primary--hover, rgb(144, 26, 190))
         );
     }
 }
