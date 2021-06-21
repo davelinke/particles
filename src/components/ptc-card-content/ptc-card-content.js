@@ -1,16 +1,10 @@
 import Ptc from '../ptc/ptc.js'
-import styles from './ptc-card.css.js';
+import styles from './ptc-card-content.css.js';
 
-class ParticleCard extends Ptc {
+class ParticleCardContent extends Ptc {
 
     constructor() {
         super();
-
-        this.initProps([{
-            name: 'elevation',
-            defaultValue: null,
-            type: 'number'
-        }]);
 
         // attach shadow dom
         this._shadow = this.attachShadow({ mode: 'open' });
@@ -25,4 +19,4 @@ class ParticleCard extends Ptc {
     }
 }
 
-export default ParticleCard;
+export default ParticleCardContent;

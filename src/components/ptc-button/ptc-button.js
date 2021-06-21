@@ -38,6 +38,11 @@ class PtcButton extends Ptc {
                 name: 'disabled',
                 defaultValue: false,
                 type: 'boolean'
+            },
+            {
+                name: 'elevation',
+                defaultValue: null,
+                type: 'number'
             }
         ]
 
@@ -58,6 +63,15 @@ class PtcButton extends Ptc {
         if (this.href) {
             this.setAttribute('role', this._role);
         }
+
+        this.setAttribute('tabIndex', 0);
+
+        this.addEventListener('mousedown',()=>{
+            this.classList.add('active')
+        })
+        this.addEventListener('mouseup',()=>{
+            this.classList.remove('active')
+        })
 
         // custom initialization of stuff
         this.addEventListener('click', () => {

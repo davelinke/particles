@@ -6,8 +6,10 @@
   "author": "David Linke",
   "license": "MIT",
   "devDependencies": {
+    "babel-eslint": "^10.1.0",
     "browser-sync": "^2.26.14",
     "chokidar": "^3.5.2",
+    "eslint": "^7.29.0",
     "html-minifier": "^4.0.0",
     "live-server": "^1.2.1",
     "node-sass": "^6.0.0",

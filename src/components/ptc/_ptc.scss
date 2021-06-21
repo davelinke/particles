@@ -1,30 +1,14 @@
-@mixin ptc-base(
-    $name: null,
-    $state: "idle",
-    $bgColor: null,
-    $textColor: null,
-    $borderRadius: null,
-    $padding: null,
-    $margin: null
-) {
-    display: inline-block;
-    @if $name {
-        @if $bgColor {
-            background-color: var(--#{$name}__bg-color--#{$state}, #{$bgColor});
-        }
-        @if $textColor {
-            color: var(--#{$name}__text-color--#{$state}, #{$textColor});
-        }
-        @if $borderRadius {
-            border-radius: var(--#{$name}__border-radius--#{$state}, #{$borderRadius});
-        }
-        @if $padding {
-            padding: var(--#{$name}__padding-#{$state}, #{$padding});
-        }
-        @if $margin {
-            margin: var(--#{$name}__margin--#{$state}, #{$margin});
-        }
-    } @else {
-        content: "You didn't provide the name of the property";
+
+
+@mixin prop($element, $variant, $generic, $propertyName, $propertyState, $propertyValue){
+    
+    $variantConnector:'';
+    @if $variant {
+        $variantConnector:'-';
     }
+
+    #{$propertyName}: var(
+        --ptc-#{$element}#{$variantConnector}#{$variant}__#{$propertyName}--#{$propertyState},
+        var(--ptc-#{$generic}--#{$propertyState}, $propertyValue)
+    );
 }

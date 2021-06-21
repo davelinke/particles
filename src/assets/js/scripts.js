@@ -1,3 +1,3 @@
-import { LoadParticles } from '/components/components.js'
+import { LoadParticles } from '/components/index.js'
 
-LoadParticles(['ptc-button']);
+LoadParticles(['ptc-button','ptc-card', 'ptc-card-content', 'ptc-checkbox']);

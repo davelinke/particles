@@ -1,23 +1,103 @@
 @import "../ptc/ptc";
+@import "../ptc/elevation";
+
+@mixin e($propertyName, $propertyState, $propertyValue) {
+    @include prop(button, null, color-cta, $propertyName, $propertyState, $propertyValue);
+}
+
+@mixin v($variant, $propertyName, $propertyState, $propertyValue) {
+    @include prop(button, $variant, color-success, $propertyName, $propertyState, $propertyValue);
+}
 
 :host {
-    @include ptc-base(
-        "ptc-button",
-        "idle",
-        var(--p-cta__color-primary--idle, rgb(94, 8, 128)),
-        var(--p-cta__color-secondary--idle, #fff),
-        var(--p-cta__border-radius, 2px),
-        var(--p-cta__padding, 0.5rem 1.25rem),
-        var(--p-cta__margin, 0)
-    );
+    @include e(background-color, idle, rgb(94, 8, 128));
+    @include e(color, idle, #fff);
+    @include e(border-radius, idle, 0);
+    @include e(padding, idle, 0.5rem 1.25rem);
+    @include e(margin, idle, 0);
+    @include e(font-weight, idle, 600);
+    @include e(font-size, idle, 1.5rem);
+    @include e(border-color, idle, rgb(94, 8, 128));
+    @include e(border-width, idle, 2px);
+    @include e(border-style, idle, solid);
+
+    outline: none;
     cursor: pointer;
 }
+
+:host(.active) {
+    @include e(background-color, active, rgb(54, 1, 75));
+    @include e(border-color, active, rgb(54, 1, 75));
+}
+
+:host(:focus) {
+    @include e(background-color, selected, rgb(144, 26, 190));
+    @include e(border-color, selected, rgb(144, 26, 190));
+}
+
+:host([variant="completion"]) {
+    @include v(completion, background-color, idle, rgb(8, 128, 14));
+    @include v(completion, border-color, idle, rgb(8, 128, 14));
+}
+
+:host([variant="completion"].active) {
+    @include v(completion, background-color, active, rgb(4, 73, 7));
+    @include v(completion, border-color, active, rgb(4, 73, 7));
+}
+
+:host([variant="completion"]:focus) {
+    @include v(completion, background-color, selected, rgb(11, 177, 20));
+    @include v(completion, border-color, selected, rgb(11, 177, 20));
+}
+
+:host([variant="secondary"]) {
+    @include v(secondary, background-color, idle, rgb(255, 255, 255));
+    @include v(secondary, color, idle, rgb(94, 8, 128));
+    @include v(secondary, border-color, idle, rgb(94, 8, 128));
+    @include v(secondary, border-width, idle, 2px);
+    @include v(secondary, border-style, idle, solid);
+}
+
+:host([variant="secondary"].active) {
+    @include v(secondary, background-color, active, rgb(54, 1, 75));
+    @include v(secondary, border-color, active, rgb(54, 1, 75));
+    @include v(secondary, background-color, active, #fff);
+}
+
+:host([variant="secondary"]:focus) {
+    @include v(secondary, background-color, selected, rgb(144, 26, 190));
+    @include v(secondary, background-color, selected, rgb(144, 26, 190));
+    @include v(secondary, background-color, selected, #fff);
+}
+
 @media (hover: hover) {
     :host(:hover) {
-        @include ptc-base(
-            "ptc-button", 
-            "hover", 
-            var(--p-cta__color-primary--hover, rgb(144, 26, 190))
-        );
+        @include e(background-color, selected, rgb(144, 26, 190));
+        @include e(border-color, selected, rgb(144, 26, 190));
     }
+    :host(:hover.active) {
+        @include e(background-color, active, rgb(54, 1, 75));
+        @include e(border-color, active, rgb(54, 1, 75));
+    }
+
+    :host([variant="completion"]:hover) {
+        @include v(completion, background-color, selected, rgb(11, 177, 20));
+        @include v(completion, border-color, selected, rgb(11, 177, 20));
+    }
+    :host([variant="completion"]:hover.active) {
+        @include v(completion, background-color, active, rgb(4, 73, 7));
+        @include v(completion, border-color, active, rgb(4, 73, 7));
+    }
+
+    :host([variant="secondary"]:hover) {
+        @include v(secondary, color, selected, rgb(144, 26, 190));
+        @include v(secondary, border-color, selected, rgb(144, 26, 190));
+        @include v(secondary, background-color, selected, #fff);
+    }
+    :host([variant="secondary"]:hover.active) {
+        @include v(secondary, color, active, rgb(54, 1, 75));
+        @include v(secondary, border-color, active, rgb(54, 1, 75));
+        @include v(secondary, background-color, active, #fff);
+    }
+        
 }

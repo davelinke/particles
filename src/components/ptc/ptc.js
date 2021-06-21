@@ -31,7 +31,7 @@ class Ptc extends HTMLElement {
                 return this.getProp(name);
             },
             set: (val)=>{
-                return this.setProp(name,val);
+                this.setProp(name,val);
             }
         })
     }
@@ -64,7 +64,7 @@ class Ptc extends HTMLElement {
                 }
                 break;
             default:
-                console.log('default')
+                console.log("default");
         }
     
         return val;

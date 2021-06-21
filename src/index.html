@@ -17,8 +17,27 @@
 
     <h1>Web components the vanilla way</h1>
     <h2>Button</h2>
-    <ptc-button variant="primary" href="https://www.google.com">Button</ptc-button>
+    <div>
+        <ptc-button elevation="1" variant="completion" >Completion</ptc-button>
+        &nbsp;
+        <ptc-button elevation="1" variant="primary" >Primary</ptc-button>
+        &nbsp;
+        <ptc-button elevation="1" variant="secondary" >Secondary</ptc-button>
+        &nbsp;
+        <ptc-button elevation="1" disabled>Disabled</ptc-button>
+        &nbsp;
+        <ptc-button elevation="1" variant="text">Text</ptc-button>
+        &nbsp;
+        <ptc-button elevation="1" variant="text" disabled>Text Disabled</ptc-button>
+    </div>
     <h2>Card</h2>
+    <ptc-card elevation="1">
+        <ptc-card-content>
+            Hello
+        </ptc-card-content>
+    </ptc-card>
+    <h2>Checkbox</h2>
+        <ptc-checkbox>Label 1<br>label</ptc-checkbox>
     <script type="module" src="assets/js/scripts.js"></script>
 </body>
 

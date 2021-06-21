@@ -1,0 +1,26 @@
+@import "../ptc/ptc";
+
+@mixin p($propertyName, $propertyState, $propertyValue){
+    @include prop(ptc-checkbox, ptc-toggle, $propertyName, $propertyState, $propertyValue);
+}
+
+:host {
+    display:inline-flex;
+    // @include p(background-color, idle, transparent);
+    // @include p(text-color, idle, #333);
+    cursor: pointer;
+}
+
+:host([disbled]){
+    pointer-events: none;
+    cursor:not-allowed;
+}
+
+:host::before{
+    content: " ";
+    display: block;
+    width: 16px;
+    height: 16px;
+    border: 1px solid #ccc;
+    margin-inline-end: 0.5rem;
+}
