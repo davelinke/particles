@@ -84,8 +84,8 @@ class PtcButton extends Ptc {
                 const form = this.closest('form');
                 if (form) return form.submit();
             }
-            if (this.type!=='submit' && this.href) {
-                switch (this._target) {
+            if ((this.type!=='submit') && this.href) {
+                switch (this.target) {
                     case (null):
                         window.location.href = this.href;
                         break;
@@ -107,7 +107,7 @@ class PtcButton extends Ptc {
                     default:
                         for (let i = 0; i < window.frames.length; i++) {
                             const frame = window.frames[i];
-                            if (frame.name === this._target) {
+                            if (frame.name === this.target) {
                                 frame.location.href = this.href;
                                 break;
                             }
