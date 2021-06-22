@@ -19,7 +19,7 @@ module.exports.parseHTML = (p) => {
                 removeAttributeQuotes: true,
                 removeComments: true,
                 removeEmptyAttributes: true,
-                removeEmptyElements: true,
+                removeEmptyElements: false,
                 removeOptionalTags: false,
                 removeRedundantAttributes: true,
                 removeScriptTypeAttributes: true,

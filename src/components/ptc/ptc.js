@@ -1,52 +1,54 @@
 class Ptc extends HTMLElement {
     _props = {};
-    
-    setupStyleElement(stylesCss){
+
+    setupStyleElement(stylesCss) {
         const styles = document.createElement('style');
         styles.textContent = stylesCss;
         return styles
     }
 
-    initProps(propsArray){
+    initProps(propsArray) {
         const defaultPropValues = {
-            defaultValue:null,
-            type:'string'
+            defaultValue: null,
+            type: 'string'
         }
-    
-        for (let baseProp of propsArray){
-            const prop = {...defaultPropValues,...baseProp};
-            prop.name && this.initProp(prop.name,prop.defaultValue,prop.type);
+
+        for (let baseProp of propsArray) {
+            const prop = { ...defaultPropValues, ...baseProp };
+            prop.name && this.initProp(prop.name, prop.defaultValue, prop.type);
         }
     }
 
-    initProp(name, defaultValue, type){
-        
+    initProp(name, defaultValue, type) {
+
+        const attrValue = this.getAttribute(name)
+
         this._props[name] = {
-            value: defaultValue,
+            value: (attrValue ? attrValue : defaultValue),
             type: type
         }
-    
-        Object.defineProperty(this,name,{
-            get: ()=>{
+
+        Object.defineProperty(this, name, {
+            get: () => {
                 return this.getProp(name);
             },
-            set: (val)=>{
-                this.setProp(name,val);
+            set: (val) => {
+                this.setProp(name, val);
             }
         })
     }
 
-    getProp(name){
+    getProp(name) {
         return this._props[name].value;
     }
 
-    setProp(name,val, fromAttribute){
+    setProp(name, val, fromAttribute) {
 
         const type = this._props[name].type;
-        
-        switch (type){
+
+        switch (type) {
             case 'string':
-                if(val){
+                if (val) {
                     this._props[name].value = val
                     !fromAttribute && this.setAttribute(name, val);
                 } else {
@@ -55,9 +57,9 @@ class Ptc extends HTMLElement {
                 }
                 break;
             case 'boolean':
-                if(val){
+                if (val) {
                     this._props[name].value = true;
-                    !fromAttribute && this.setAttribute(name,'true');
+                    !fromAttribute && this.setAttribute(name, 'true');
                 } else {
                     this._props[name].value = false;
                     !fromAttribute && this.removeAttribute(name);
@@ -66,7 +68,7 @@ class Ptc extends HTMLElement {
             default:
                 console.log("default");
         }
-    
+
         return val;
     }
 }

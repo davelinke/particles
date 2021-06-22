@@ -9,95 +9,147 @@
     @include prop(button, $variant, color-success, $propertyName, $propertyState, $propertyValue);
 }
 
+//REGULAR
+
 :host {
-    @include e(background-color, idle, rgb(94, 8, 128));
-    @include e(color, idle, #fff);
+    @include e(background-color, idle, $color-cta-idle);
+    @include e(color, idle, $color-grayscale-max);
     @include e(border-radius, idle, 0);
-    @include e(padding, idle, 0.5rem 1.25rem);
+    @include e(padding, idle, 0 1.25rem);
+    @include e(height, idle, 2.125rem);
     @include e(margin, idle, 0);
     @include e(font-weight, idle, 600);
-    @include e(font-size, idle, 1.5rem);
-    @include e(border-color, idle, rgb(94, 8, 128));
-    @include e(border-width, idle, 2px);
+    @include e(font-size, idle, 1rem);
+    @include e(border-color, idle, $color-cta-idle);
+    @include e(border-width, idle, $elements-border-width);
     @include e(border-style, idle, solid);
+    @include e(white-space, idle, nowrap);
 
     outline: none;
     cursor: pointer;
+    display: inline-flex;
+    align-items: center;
 }
 
 :host(.active) {
-    @include e(background-color, active, rgb(54, 1, 75));
-    @include e(border-color, active, rgb(54, 1, 75));
+    @include e(background-color, active, $color-cta-active);
+    @include e(border-color, active, $color-cta-active);
 }
 
 :host(:focus) {
-    @include e(background-color, selected, rgb(144, 26, 190));
-    @include e(border-color, selected, rgb(144, 26, 190));
+    @include e(background-color, selected, $color-cta-selected);
+    @include e(border-color, selected, $color-cta-selected);
 }
 
+:host([disabled]) {
+    @include e(background-color, disabled, $color-disabled);
+    @include e(border-color, disabled, $color-disabled);
+    pointer-events: none;
+}
+
+//COMPLETION
+
 :host([variant="completion"]) {
-    @include v(completion, background-color, idle, rgb(8, 128, 14));
-    @include v(completion, border-color, idle, rgb(8, 128, 14));
+    @include v(completion, background-color, idle, $color-status-success-idle);
+    @include v(completion, border-color, idle, $color-status-success-idle);
 }
 
 :host([variant="completion"].active) {
-    @include v(completion, background-color, active, rgb(4, 73, 7));
-    @include v(completion, border-color, active, rgb(4, 73, 7));
+    @include v(completion, background-color, active, $color-status-success-active);
+    @include v(completion, border-color, active, $color-status-success-active);
 }
 
 :host([variant="completion"]:focus) {
-    @include v(completion, background-color, selected, rgb(11, 177, 20));
-    @include v(completion, border-color, selected, rgb(11, 177, 20));
+    @include v(completion, background-color, selected, $color-status-success-selected);
+    @include v(completion, border-color, selected, $color-status-success-selected);
 }
 
+
+// SECONDARY
+
 :host([variant="secondary"]) {
-    @include v(secondary, background-color, idle, rgb(255, 255, 255));
-    @include v(secondary, color, idle, rgb(94, 8, 128));
-    @include v(secondary, border-color, idle, rgb(94, 8, 128));
-    @include v(secondary, border-width, idle, 2px);
+    @include v(secondary, background-color, idle, $color-grayscale-max);
+    @include v(secondary, color, idle, $color-cta-idle);
+    @include v(secondary, border-color, idle, $color-cta-idle);
+    @include v(secondary, border-width, idle, $elements-border-width);
     @include v(secondary, border-style, idle, solid);
+}
+:host([variant="secondary"][disabled]) {
+    @include e(border-color, disabled, $color-disabled);
+    @include e(color, disabled, $color-disabled);
 }
 
 :host([variant="secondary"].active) {
-    @include v(secondary, background-color, active, rgb(54, 1, 75));
-    @include v(secondary, border-color, active, rgb(54, 1, 75));
-    @include v(secondary, background-color, active, #fff);
+    @include v(secondary, color, active, $color-cta-active);
+    @include v(secondary, border-color, active, $color-cta-active);
+    @include v(secondary, background-color, active, $color-grayscale-max);
 }
 
 :host([variant="secondary"]:focus) {
-    @include v(secondary, background-color, selected, rgb(144, 26, 190));
-    @include v(secondary, background-color, selected, rgb(144, 26, 190));
-    @include v(secondary, background-color, selected, #fff);
+    @include v(secondary, color, selected, $color-cta-selected);
+    @include v(secondary, border-color, selected, $color-cta-selected);
+    @include v(secondary, background-color, selected, $color-grayscale-max);
+}
+
+
+// TEXT
+
+:host([variant="text"]) {
+    @include v(secondary, color, idle, $color-cta-idle);
+    border: none;
+    background:none;
+    box-shadow: none !important;
+    padding: 0;
+    margin: 0;
+}
+:host([variant="text"][disabled]) {
+    @include e(color, disabled, $color-disabled);
+}
+
+:host([variant="text"].active) {
+    @include v(text, color, active, $color-cta-active);;
+}
+
+:host([variant="text"]:focus) {
+    @include v(text, color, selected, $color-cta-selected);
 }
 
 @media (hover: hover) {
     :host(:hover) {
-        @include e(background-color, selected, rgb(144, 26, 190));
-        @include e(border-color, selected, rgb(144, 26, 190));
+        @include e(background-color, selected, $color-cta-selected);
+        @include e(border-color, selected, $color-cta-selected);
     }
     :host(:hover.active) {
-        @include e(background-color, active, rgb(54, 1, 75));
-        @include e(border-color, active, rgb(54, 1, 75));
+        @include e(background-color, active, $color-cta-active);
+        @include e(border-color, active, $color-cta-active);
     }
 
     :host([variant="completion"]:hover) {
-        @include v(completion, background-color, selected, rgb(11, 177, 20));
-        @include v(completion, border-color, selected, rgb(11, 177, 20));
+        @include v(completion, background-color, selected, $color-status-success-selected);
+        @include v(completion, border-color, selected, $color-status-success-selected);
     }
     :host([variant="completion"]:hover.active) {
-        @include v(completion, background-color, active, rgb(4, 73, 7));
-        @include v(completion, border-color, active, rgb(4, 73, 7));
+        @include v(completion, background-color, active, $color-status-success-active);
+        @include v(completion, border-color, active, $color-status-success-active);
     }
 
     :host([variant="secondary"]:hover) {
-        @include v(secondary, color, selected, rgb(144, 26, 190));
-        @include v(secondary, border-color, selected, rgb(144, 26, 190));
-        @include v(secondary, background-color, selected, #fff);
+        @include v(secondary, color, selected, $color-cta-selected);
+        @include v(secondary, border-color, selected, $color-cta-selected);
+        @include v(secondary, background-color, selected, $color-grayscale-max);
     }
     :host([variant="secondary"]:hover.active) {
-        @include v(secondary, color, active, rgb(54, 1, 75));
-        @include v(secondary, border-color, active, rgb(54, 1, 75));
-        @include v(secondary, background-color, active, #fff);
+        @include v(secondary, color, active, $color-cta-active);
+        @include v(secondary, border-color, active, $color-cta-active);
+        @include v(secondary, background-color, active, $color-grayscale-max);
+    }
+
+    :host([variant="text"]:hover) {
+        @include v(text, color, selected, $color-cta-selected);
+        background:none;
+    }
+    :host([variant="text"]:hover.active) {
+        @include v(text, color, active, $color-cta-active);
     }
         
 }

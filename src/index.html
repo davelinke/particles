@@ -11,24 +11,27 @@
     <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon/favicon-16x16.png">
     <link rel="manifest" href="assets/images/favicon/site.webmanifest">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
 </head>
 
 <body>
 
     <h1>Web components the vanilla way</h1>
     <h2>Button</h2>
-    <div>
-        <ptc-button elevation="1" variant="completion" >Completion</ptc-button>
-        &nbsp;
-        <ptc-button elevation="1" variant="primary" >Primary</ptc-button>
-        &nbsp;
-        <ptc-button elevation="1" variant="secondary" >Secondary</ptc-button>
-        &nbsp;
-        <ptc-button elevation="1" disabled>Disabled</ptc-button>
-        &nbsp;
-        <ptc-button elevation="1" variant="text">Text</ptc-button>
-        &nbsp;
-        <ptc-button elevation="1" variant="text" disabled>Text Disabled</ptc-button>
+    <div class="side-by-side">
+        <ptc-button elevation="1" variant="completion"><i class="fas fa-plus"></i>&nbsp;Completion</ptc-button>
+
+        <ptc-button elevation="1" variant="primary"><i class="fas fa-plus"></i>&nbsp;Primary</ptc-button>
+
+        <ptc-button elevation="1" variant="primary" disabled><i class="fas fa-plus"></i>&nbsp;Primary Disabled</ptc-button>
+
+        <ptc-button elevation="1" variant="secondary"><i class="fas fa-plus"></i>&nbsp;Secondary</ptc-button>
+
+        <ptc-button elevation="1" variant="secondary" disabled><i class="fas fa-plus"></i>&nbsp;Secondary Disabled</ptc-button>
+
+        <ptc-button elevation="1" variant="text" href="https://www.google.com"><i class="fas fa-plus"></i>&nbsp;Text</ptc-button>
+
+        <ptc-button elevation="1" variant="text" disabled><i class="fas fa-plus"></i>&nbsp;Text Disabled</ptc-button>
     </div>
     <h2>Card</h2>
     <ptc-card elevation="1">
@@ -37,7 +40,7 @@
         </ptc-card-content>
     </ptc-card>
     <h2>Checkbox</h2>
-        <ptc-checkbox>Label 1<br>label</ptc-checkbox>
+    <ptc-checkbox>Label 1<br>label</ptc-checkbox>
     <script type="module" src="assets/js/scripts.js"></script>
 </body>
 

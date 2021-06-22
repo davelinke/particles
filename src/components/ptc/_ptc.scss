@@ -1,4 +1,25 @@
 
+$color-grayscale-max: #fff;
+$color-grayscale-75: hsl(0, 0%, 75%);
+$color-grayscale-50: hsl(0, 0%, 50%);
+$color-grayscale-25: hsl(0, 0%, 25%);
+$color-grayscale-min: #000;
+
+$color-status-success-idle: #2a8562;
+$color-status-success-selected: rgb(11, 177, 20);
+$color-status-success-active: #247153;
+
+$color-cta-idle: #238196;
+$color-cta-selected: #2b9eb8;
+$color-cta-active: #1d697b;
+
+$color-disabled: $color-grayscale-50;
+
+$elements-border-width: 0.125rem;
+
+*{
+    -webkit-font-smoothing: antialiased;
+}
 
 @mixin prop($element, $variant, $generic, $propertyName, $propertyState, $propertyValue){
     

@@ -43,6 +43,11 @@ class PtcButton extends Ptc {
                 name: 'elevation',
                 defaultValue: null,
                 type: 'number'
+            },
+            {
+                name: 'type',
+                defaultValue: 'button',
+                tyle: 'string'
             }
         ]
 
@@ -60,9 +65,9 @@ class PtcButton extends Ptc {
         this._shadow.append(slot);
 
         // check if the button is a link
-        if (this.href) {
-            this.setAttribute('role', this._role);
-        }
+        this.href && (this.role = 'link');
+        // set the role forcefully for accessibility
+        !this.getAttribute('role') && this.setAttribute('role', this.role);
 
         this.setAttribute('tabIndex', 0);
 
@@ -75,7 +80,11 @@ class PtcButton extends Ptc {
 
         // custom initialization of stuff
         this.addEventListener('click', () => {
-            if (this.href) {
+            if (this.type==='submit'){
+                const form = this.closest('form');
+                if (form) return form.submit();
+            }
+            if (this.type!=='submit' && this.href) {
                 switch (this._target) {
                     case (null):
                         window.location.href = this.href;

@@ -1,12 +1,12 @@
 @import "../ptc/ptc";
 
 @mixin p($propertyName, $propertyState, $propertyValue){
-    @include prop(ptc-card-content, ptc-container, $propertyName, $propertyState, $propertyValue);
+    @include prop(ptc-card-content, null, ptc-container, $propertyName, $propertyState, $propertyValue);
 }
 
 :host {
     display:inline-block;
     @include p(background-color, idle, transparent);
     @include p(text-color, idle, #333);
-    @include p(padding, idle, 1rem);
+    @include p(padding, idle, 0.75rem);
 }
