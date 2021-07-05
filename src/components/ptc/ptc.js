@@ -21,12 +21,14 @@ class Ptc extends HTMLElement {
 
     initProp(name, defaultValue, type) {
 
-        const attrValue = this.getAttribute(name)
+        let attrValue = this.getAttribute(name);
 
+        (type === 'boolean') && ((attrValue !== null) && (attrValue !== false)) && (attrValue = true);
         this._props[name] = {
             value: (attrValue ? attrValue : defaultValue),
             type: type
         }
+
 
         Object.defineProperty(this, name, {
             get: () => {

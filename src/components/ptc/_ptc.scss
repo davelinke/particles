@@ -1,3 +1,6 @@
+$framework-prefix: ptc;
+
+$border-radius: 0;
 
 $color-grayscale-max: #fff;
 $color-grayscale-75: hsl(0, 0%, 75%);
@@ -15,21 +18,24 @@ $color-cta-active: #1d697b;
 
 $color-disabled: $color-grayscale-50;
 
+$color-input-border-idle: $color-grayscale-50;
+$color-input-border-selected: $color-cta-selected;
+$color-input-background: $color-grayscale-max;
+
 $elements-border-width: 0.125rem;
 
-*{
+* {
     -webkit-font-smoothing: antialiased;
 }
 
-@mixin prop($element, $variant, $generic, $propertyName, $propertyState, $propertyValue){
-    
-    $variantConnector:'';
+@mixin prop($element, $variant, $generic, $propertyName, $propertyState, $propertyValue) {
+    $variantConnector: "";
     @if $variant {
-        $variantConnector:'-';
+        $variantConnector: "-";
     }
 
     #{$propertyName}: var(
-        --ptc-#{$element}#{$variantConnector}#{$variant}__#{$propertyName}--#{$propertyState},
-        var(--ptc-#{$generic}--#{$propertyState}, $propertyValue)
+        --#{$framework-prefix}-#{$element}#{$variantConnector}#{$variant}__#{$propertyName}--#{$propertyState},
+        var(--#{$framework-prefix}-#{$generic}--#{$propertyState}, $propertyValue)
     );
 }

@@ -69,7 +69,7 @@ class PtcButton extends Ptc {
         // set the role forcefully for accessibility
         !this.getAttribute('role') && this.setAttribute('role', this.role);
 
-        this.setAttribute('tabIndex', 0);
+        (!this.getAttribute('tabindex')) && this.setAttribute('tabindex', 0);
 
         this.addEventListener('mousedown',()=>{
             this.classList.add('active')

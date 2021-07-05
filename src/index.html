@@ -18,40 +18,77 @@
     <h1>Web components the vanilla way</h1>
     <h2>Button</h2>
     <div class="side-by-side">
-        <ptc-button elevation="1" variant="completion"><i data-feather="plus"></i>&nbsp;Completion</ptc-button>
+        <ptc-button elevation="1" variant="completion"><i data-feather="check"></i>&nbsp;Completion</ptc-button>
 
         <ptc-button elevation="1" variant="primary"><i data-feather="plus"></i>&nbsp;Primary</ptc-button>
 
         <ptc-button elevation="1" variant="primary" disabled><i data-feather="plus"></i>&nbsp;Primary Disabled
         </ptc-button>
 
-        <ptc-button elevation="1" variant="secondary"><i data-feather="plus"></i>&nbsp;Secondary</ptc-button>
+        <ptc-button elevation="1" variant="secondary"><i data-feather="download"></i>&nbsp;Secondary</ptc-button>
 
-        <ptc-button elevation="1" variant="secondary" disabled><i data-feather="plus"></i>&nbsp;Secondary Disabled
+        <ptc-button elevation="1" variant="secondary" disabled><i data-feather="download"></i>&nbsp;Secondary Disabled
         </ptc-button>
 
-        <ptc-button elevation="1" variant="text" href="https://www.google.com"><i data-feather="plus"></i>&nbsp;Text
+        <ptc-button elevation="1" variant="text" href="https://www.google.com"><i data-feather="type"></i>&nbsp;Text
         </ptc-button>
 
-        <ptc-button elevation="1" variant="text" disabled><i data-feather="plus"></i>&nbsp;Text Disabled</ptc-button>
+        <ptc-button elevation="1" variant="text" disabled><i data-feather="type"></i>&nbsp;Text Disabled</ptc-button>
     </div>
     <h2>Card</h2>
-    <ptc-card elevation="1">
-        <ptc-card-content>
-            Hello
-        </ptc-card-content>
-    </ptc-card>
+    <div class="side-by-side">
+        <ptc-card elevation="1" class="cards">
+            <img width="100%" src="assets/images/particles.webp" />
+            <ptc-content>
+                <h3>As you can see...</h3>
+                <p>we’ve had our eye on you for some time now, Mr. Anderson. It seems that you’ve been living two lives. In one life...</p>
+            </ptc-content>
+            <ptc-action-bar></ptc-action-bar>
+        </ptc-card>
+        <ptc-card elevation="1" class="cards">
+            <img width="100%" src="assets/images/particles-2.jpeg" />
+            <ptc-content>
+                <h3>You’re Thomas A. Anderson</h3>
+                <p>program writer for a respectable software company, you have a social security number, you pay your taxes, and... </p>
+            </ptc-content>
+            <ptc-action-bar></ptc-action-bar>
+        </ptc-card>
+        <ptc-card elevation="1" class="cards">
+            <img width="100%" src="assets/images/particles-3.jpeg" />
+            <ptc-content>
+                <h3>You help your landlady...</h3>
+                <p>Carry out her garbage. The other life is lived in computers, where you go by the hacker alias Neo and are guilty of virtually...</p>
+            </ptc-content>
+            <ptc-action-bar></ptc-action-bar>
+        </ptc-card>
+        <ptc-card elevation="1" class="cards">
+            <img width="100%" src="assets/images/abstract-particles-4.jpeg" />
+            <ptc-content>
+                <h3>Every computer crime...</h3>
+                <p>We have a law for. One of these lives has a future, and one of them does not. I’m going to be as forthcoming as I can be.</p>
+            </ptc-content>
+            <ptc-action-bar></ptc-action-bar>
+        </ptc-card>
+    </div>
+
     <h2>Checkbox</h2>
-    <ptc-checkbox>Label 1<br>label</ptc-checkbox>
+    <div class="side-by-side">
+        <ptc-checkbox tab-index="-1">Morpheous</ptc-checkbox>
+        <ptc-checkbox checked>Neo</ptc-checkbox>
+        <ptc-checkbox>A singular consciousness that spawned an entire race of machines. We don’t know who struck first,
+            us or them. But we know that it was us that scorched the sky. At the time they were dependent on <a
+                href="javascript:;" data-h="https://en.wikipedia.org/wiki/Solar_power">solar power</a> and it was believed
+            that they would be unable to survive without an energy source as abundant as the sun.</ptc-checkbox>
+    </div>
     <script type="module" src="assets/js/scripts.js"></script>
     <script src="https://unpkg.com/feather-icons"></script>
 
     <script>
-        feather.replace({ 
+        feather.replace({
             'stroke-width': 2,
-            width:22,
-            height:22
-        })
+            width: 22,
+            height: 22
+        });
     </script>
 </body>
 

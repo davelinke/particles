@@ -7,10 +7,16 @@ body{
 }
 
 .side-by-side{
-    display:flex; justify-content: space-between; align-items: center; flex-wrap: wrap
+    display:flex; justify-content: space-evenly; align-items: center; flex-wrap: wrap
 }
 .side-by-side > * {
     margin-bottom: 1rem;;
 }
 
-/* test 3 */
+.cards{
+    width: 300px;
+}
+
+ptc-content > h3:first-child {
+    margin-top: 0;
+}

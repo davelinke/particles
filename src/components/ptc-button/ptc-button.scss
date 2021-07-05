@@ -14,7 +14,6 @@
 :host {
     @include e(background-color, idle, $color-cta-idle);
     @include e(color, idle, $color-grayscale-max);
-    @include e(border-radius, idle, 0);
     @include e(padding, idle, 0 1.25rem);
     @include e(height, idle, 2.125rem);
     @include e(margin, idle, 0);
@@ -23,6 +22,7 @@
     @include e(border-color, idle, $color-cta-idle);
     @include e(border-width, idle, $elements-border-width);
     @include e(border-style, idle, solid);
+    @include e(border-radius, idle, $border-radius);
     @include e(white-space, idle, nowrap);
 
     outline: none;
@@ -45,6 +45,7 @@
     @include e(background-color, disabled, $color-disabled);
     @include e(border-color, disabled, $color-disabled);
     pointer-events: none;
+    cursor:not-allowed;
 }
 
 //COMPLETION

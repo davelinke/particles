@@ -1,7 +1,7 @@
 import Ptc from '../ptc/ptc.js'
-import styles from './ptc-card-content.css.js';
+import styles from './ptc-content.css.js';
 
-class ParticleCardContent extends Ptc {
+class ParticleContent extends Ptc {
 
     constructor() {
         super();
@@ -19,4 +19,4 @@ class ParticleCardContent extends Ptc {
     }
 }
 
-export default ParticleCardContent;
+export default ParticleContent;
