@@ -10,7 +10,8 @@ class Ptc extends HTMLElement {
     initProps(propsArray) {
         const defaultPropValues = {
             defaultValue: null,
-            type: 'string'
+            type: 'string',
+            reflect: true
         }
 
         for (let baseProp of propsArray) {
@@ -21,23 +22,26 @@ class Ptc extends HTMLElement {
 
     initProp(name, defaultValue, type) {
 
-        let attrValue = this.getAttribute(name);
-
-        (type === 'boolean') && ((attrValue !== null) && (attrValue !== false)) && (attrValue = true);
-        this._props[name] = {
-            value: (attrValue ? attrValue : defaultValue),
-            type: type
-        }
-
-
         Object.defineProperty(this, name, {
             get: () => {
-                return this.getProp(name);
+                return this._props[name].value;
             },
             set: (val) => {
                 this.setProp(name, val);
             }
-        })
+        });
+
+        let attrValue = (type === 'boolean' ? this.hasAttribute(name) : this.getAttribute(name));
+        let faceValue = attrValue;
+
+        if (type !== 'boolean') {
+            faceValue = (attrValue ? attrValue : defaultValue);
+        }
+
+        this._props[name] = {
+            value: faceValue,
+            type: type
+        }
     }
 
     getProp(name) {
@@ -45,7 +49,7 @@ class Ptc extends HTMLElement {
     }
 
     setProp(name, val, fromAttribute) {
-
+        console.log(name);
         const type = this._props[name].type;
 
         switch (type) {

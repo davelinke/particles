@@ -3,12 +3,6 @@ import styles from './ptc-button.css.js';
 
 class PtcButton extends Ptc {
 
-    // observe properties
-    static get observedAttributes() { return ['variant', 'disabled','href','target'] }
-    attributeChangedCallback(name, oldValue, newValue) {
-        this.setProp(name, newValue, true);
-    }
-
     // initialize
     constructor() {
         super();
@@ -34,8 +28,13 @@ class PtcButton extends Ptc {
                 defaultValue: null,
                 type: 'text'
             },
+            // {
+            //     name: 'disabled',
+            //     defaultValue: false,
+            //     type: 'boolean'
+            // },
             {
-                name: 'disabled',
+                name: 'woot',
                 defaultValue: false,
                 type: 'boolean'
             },
@@ -71,20 +70,48 @@ class PtcButton extends Ptc {
 
         (!this.getAttribute('tabindex')) && this.setAttribute('tabindex', 0);
 
-        this.addEventListener('mousedown',()=>{
+        this.toggleAriaDisabled();
+
+        this.addEventListener('mousedown', () => {
             this.classList.add('active')
         })
-        this.addEventListener('mouseup',()=>{
+        this.addEventListener('mouseup', () => {
             this.classList.remove('active')
         })
 
         // custom initialization of stuff
-        this.addEventListener('click', () => {
-            if (this.type==='submit'){
+        this.addEventListener('click', this.handleClick);
+
+
+        this.addEventListener('keydown', this.handleClick);
+
+    }
+
+    // observe properties
+    static get observedAttributes() { return ['variant', 'href', 'target', 'disabled'] }
+    attributeChangedCallback(name, oldValue, newValue) {
+        (name === 'disabled') ? this.toggleAriaDisabled() : this.setProp(name, newValue, true);
+    }
+
+    toggleAriaDisabled() {
+        this.setAttribute('aria-disabled', this.hasAttribute('disabled'));
+    }
+
+    handleClick(e) {
+
+        const isKeyDown = (e.type === 'keydown');
+        const isCorrectKey = (isKeyDown && (e.code === 'Space')) || (isKeyDown && (e.code === 'Enter'));
+
+        const goForIt = (e.type === 'click') || (isKeyDown && isCorrectKey);
+
+        const disabled = this.hasAttribute('disabled');
+
+        if (goForIt && !disabled) {
+            if (this.type === 'submit') {
                 const form = this.closest('form');
                 if (form) return form.submit();
             }
-            if ((this.type!=='submit') && this.href) {
+            if ((this.type !== 'submit') && this.href) {
                 switch (this.target) {
                     case (null):
                         window.location.href = this.href;
@@ -114,7 +141,7 @@ class PtcButton extends Ptc {
                         }
                 }
             }
-        });
+        }
     }
 
     // on connect

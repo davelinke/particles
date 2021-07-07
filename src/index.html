@@ -18,22 +18,23 @@
     <h1>Web components the vanilla way</h1>
     <h2>Button</h2>
     <div class="side-by-side">
+        <!---->
         <ptc-button elevation="1" variant="completion"><i data-feather="check"></i>&nbsp;Completion</ptc-button>
 
         <ptc-button elevation="1" variant="primary"><i data-feather="plus"></i>&nbsp;Primary</ptc-button>
 
         <ptc-button elevation="1" variant="primary" disabled><i data-feather="plus"></i>&nbsp;Primary Disabled
-        </ptc-button>
+        </ptc-button> 
 
         <ptc-button elevation="1" variant="secondary"><i data-feather="download"></i>&nbsp;Secondary</ptc-button>
 
-        <ptc-button elevation="1" variant="secondary" disabled><i data-feather="download"></i>&nbsp;Secondary Disabled
+        <ptc-button elevation="1" variant="secondary" woot disabled><i data-feather="download"></i>&nbsp;Secondary Disabled
         </ptc-button>
 
-        <ptc-button elevation="1" variant="text" href="https://www.google.com"><i data-feather="type"></i>&nbsp;Text
+         <ptc-button variant="text" href="https://www.google.com"><i data-feather="type"></i>&nbsp;Text
         </ptc-button>
 
-        <ptc-button elevation="1" variant="text" disabled><i data-feather="type"></i>&nbsp;Text Disabled</ptc-button>
+        <ptc-button variant="text" disabled><i data-feather="type"></i>&nbsp;Text Disabled</ptc-button> 
     </div>
     <h2>Card</h2>
     <div class="side-by-side">
@@ -75,6 +76,9 @@
     <div class="side-by-side">
         <ptc-checkbox tab-index="-1">Morpheous</ptc-checkbox>
         <ptc-checkbox checked>Neo</ptc-checkbox>
+
+        <ptc-checkbox tab-index="-1" disabled>Morpheous</ptc-checkbox>
+        <ptc-checkbox checked disabled>Neo</ptc-checkbox>
         <ptc-checkbox>A singular consciousness that spawned an entire race of machines. We don’t know who struck first,
             us or them. But we know that it was us that scorched the sky. At the time they were dependent on <a
                 href="javascript:;" data-h="https://en.wikipedia.org/wiki/Solar_power">solar power</a> and it was believed

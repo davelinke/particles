@@ -41,7 +41,8 @@
     @include e(border-color, selected, $color-cta-selected);
 }
 
-:host([disabled]) {
+:host([disabled]),
+:host([disabled]:focus) {
     @include e(background-color, disabled, $color-disabled);
     @include e(border-color, disabled, $color-disabled);
     pointer-events: none;
@@ -75,7 +76,8 @@
     @include v(secondary, border-width, idle, $elements-border-width);
     @include v(secondary, border-style, idle, solid);
 }
-:host([variant="secondary"][disabled]) {
+:host([variant="secondary"][disabled]),
+:host([variant="secondary"][disabled]:focus) {
     @include e(border-color, disabled, $color-disabled);
     @include e(color, disabled, $color-disabled);
 }

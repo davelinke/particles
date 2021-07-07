@@ -1,21 +1,24 @@
 import Ptc from '../ptc/ptc.js'
 import styles from './ptc-checkbox.css.js';
 
-class ParticleCheckbox extends Ptc {
+class ParticleCheckbox extends Ptc {// observe properties
+    
+    static get observedAttributes() { return ['variant', 'href', 'target'] }
+    attributeChangedCallback(name, oldValue, newValue) {
+        (name === 'disabled') ? this.toggleAriaDisabled() : this.setProp(name, newValue, true);
+    }
+
+    toggleAriaDisabled() {
+        this.setAttribute('aria-disabled', this.hasAttribute('disabled'));
+    }
 
     constructor() {
         super();
-
         const props = [
             {
                 name: 'status',
                 defaultValue: null,
                 type: 'string'
-            },
-            {
-                name: 'disabled',
-                defaultValue: false,
-                type: 'boolean'
             },
             {
                 name: 'value',
@@ -65,8 +68,11 @@ class ParticleCheckbox extends Ptc {
     }
 
     toggle(){
-        this.checked = !this.checked;
-        this.setAria();
+        const disabled = this.hasAttribute('disabled');
+        if(!disabled){
+            this.checked = !this.checked;
+            this.setAria();
+        }
     }
     setAria() {
         this.setAttribute('aria-checked', this.indeterminate ? 'mixed' : this.checked);
