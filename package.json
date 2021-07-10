@@ -11,8 +11,7 @@
     "chokidar": "^3.5.2",
     "eslint": "^7.29.0",
     "html-minifier": "^4.0.0",
-    "live-server": "^1.2.1",
-    "node-sass": "^6.0.0",
+    "node-sass": "^6.0.1",
     "sass": "^1.35.1",
     "terser": "^5.7.0"
   },

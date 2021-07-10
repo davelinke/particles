@@ -1,0 +1,42 @@
+@import "../ptc/ptc";
+@import "./ptc-input-reset";
+
+@mixin p($propertyName, $propertyState, $propertyValue) {
+    @include prop(input, null, input, $propertyName, $propertyState, $propertyValue);
+}
+
+:host {
+    @include p(background-color, idle, $color-grayscale-max);
+    @include p(color, idle, $color-grayscale-25);
+    @include p(padding, idle, 0.5rem 0);
+    @include p(height, idle, 2.125rem);
+    @include p(margin, idle, 0);
+    @include p(font-weight, idle, 400);
+    @include p(font-size, idle, 1rem);
+    @include p(border-color, idle, $color-input-border-idle);
+    @include p(border-width, idle, $elements-input-border-width);
+    @include p(border-style, idle, $elements-input-border-style);
+    @include p(border-radius, idle, $border-radius);
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+}
+
+:host(.selected){
+    @include p(border-color, selected, $color-input-border-selected);
+}
+
+@media(hover:hover) {
+    :host(:hover){
+        @include p(border-color, selected, $color-input-border-selected);
+    }
+}
+
+input{
+    width: 100%;
+    height: 100%;
+    text-indent: 0.5rem;
+    box-sizing: border-box;
+    overflow: visible;
+    outline: none;
+}

@@ -23,6 +23,10 @@ $color-input-border-selected: $color-cta-selected;
 $color-input-background: $color-grayscale-max;
 
 $elements-border-width: 0.125rem;
+$elements-input-border-style: solid;
+$elements-input-border-width: 1px;
+
+$elements-disabled-opacity:0.6;
 
 * {
     -webkit-font-smoothing: antialiased;
@@ -36,6 +40,6 @@ $elements-border-width: 0.125rem;
 
     #{$propertyName}: var(
         --#{$framework-prefix}-#{$element}#{$variantConnector}#{$variant}__#{$propertyName}--#{$propertyState},
-        var(--#{$framework-prefix}-#{$generic}--#{$propertyState}, $propertyValue)
+        var(--#{$framework-prefix}-#{$generic}__#{$propertyName}--#{$propertyState}, $propertyValue)
     );
 }

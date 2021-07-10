@@ -15,18 +15,13 @@ $checkbox-dimension:16px;
     outline: none;
 }
 
-:host([disbled]){
-    pointer-events: none;
-    cursor:not-allowed;
-}
-
 :host::before{
     content: " ";
     display: block;
     @include p(width, idle, $checkbox-dimension);
     @include p(height, idle, $checkbox-dimension);
-    @include p(border-style, idle, solid);
-    @include p(border-width, idle, 1px);
+    @include p(border-style, idle, $elements-input-border-style);
+    @include p(border-width, idle, $elements-input-border-width);
     @include p(border-color, idle, $color-input-border-idle);
     @include p(border-radius, idle, $border-radius);
     @include p(background-color, idle, $color-input-background);
@@ -39,7 +34,6 @@ $checkbox-dimension:16px;
 
 :host(:focus)::before{
     @include p(border-color, focus, $color-input-border-selected);
-
 }
 
 :host([checked])::before{
@@ -52,4 +46,24 @@ $checkbox-dimension:16px;
     @include p(background-color, indeterminate, $color-disabled);
     @include p(background-image, indeterminate, url(data:image/svg+xml,%3Csvg%20width%3D%22500%22%20height%3D%22500%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20d%3D%22M500%200v500H0V0h500zm-60.526%20206H60.526v88h378.948v-88z%22%20fill%3D%22%23FFF%22%20fill-rule%3D%22evenodd%22%2F%3E%3C%2Fsvg%3E));
     background-size:cover;
+}
+
+:host([disbled]){
+    pointer-events: none;
+    cursor:not-allowed;
+}
+
+
+
+:host([disabled]:focus)::before{
+    @include p(border-color, focus, $color-input-border-idle);
+}
+
+:host([disabled])::before{
+    @include p(opacity, disabled, $elements-disabled-opacity);
+}
+
+:host([checked][disabled])::before,
+:host([indeterminate][disabled])::before{
+    @include p(background-color, disabled, $color-disabled);
 }

@@ -1,8 +1,9 @@
 import Ptc from '../ptc/ptc.js'
 import styles from './ptc-checkbox.css.js';
 
-class ParticleCheckbox extends Ptc {// observe properties
+class ParticleCheckbox extends Ptc {
     
+    // observe properties
     static get observedAttributes() { return ['variant', 'href', 'target'] }
     attributeChangedCallback(name, oldValue, newValue) {
         (name === 'disabled') ? this.toggleAriaDisabled() : this.setProp(name, newValue, true);

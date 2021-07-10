@@ -28,16 +28,6 @@ class PtcButton extends Ptc {
                 defaultValue: null,
                 type: 'text'
             },
-            // {
-            //     name: 'disabled',
-            //     defaultValue: false,
-            //     type: 'boolean'
-            // },
-            {
-                name: 'woot',
-                defaultValue: false,
-                type: 'boolean'
-            },
             {
                 name: 'elevation',
                 defaultValue: null,

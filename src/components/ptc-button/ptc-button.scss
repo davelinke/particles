@@ -45,6 +45,7 @@
 :host([disabled]:focus) {
     @include e(background-color, disabled, $color-disabled);
     @include e(border-color, disabled, $color-disabled);
+    @include e(opacity, disabled, $elements-disabled-opacity);
     pointer-events: none;
     cursor:not-allowed;
 }
