@@ -10,7 +10,7 @@ class ParticleContent extends Ptc {
         this._shadow = this.attachShadow({ mode: 'open' });
 
         // add styles
-        const styleElement = this.setupStyleElement(styles)
+        const styleElement = this._setupStyleElement(styles)
         this._shadow.append(styleElement);
 
         // create the html

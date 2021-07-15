@@ -1,13 +1,13 @@
 class Ptc extends HTMLElement {
     _props = {};
 
-    setupStyleElement(stylesCss) {
+    _setupStyleElement(stylesCss) {
         const styles = document.createElement('style');
         styles.textContent = stylesCss;
         return styles
     }
 
-    initProps(propsArray) {
+    _initProps(propsArray) {
         const defaultPropValues = {
             defaultValue: null,
             type: 'string',
@@ -16,18 +16,18 @@ class Ptc extends HTMLElement {
 
         for (let baseProp of propsArray) {
             const prop = { ...defaultPropValues, ...baseProp };
-            prop.name && this.initProp(prop.name, prop.defaultValue, prop.type);
+            prop.name && this._initProp(prop.name, prop.defaultValue, prop.type);
         }
     }
 
-    initProp(name, defaultValue, type) {
+    _initProp(name, defaultValue, type) {
 
         Object.defineProperty(this, name, {
             get: () => {
                 return this._props[name].value;
             },
             set: (val) => {
-                this.setProp(name, val);
+                this._setProp(name, val);
             }
         });
 
@@ -44,11 +44,11 @@ class Ptc extends HTMLElement {
         }
     }
 
-    getProp(name) {
+    _getProp(name) {
         return this._props[name].value;
     }
 
-    setProp(name, val, fromAttribute) {
+    _setProp(name, val, fromAttribute) {
         console.log(name);
         const type = this._props[name].type;
 
@@ -68,6 +68,25 @@ class Ptc extends HTMLElement {
                     !fromAttribute && this.setAttribute(name, 'true');
                 } else {
                     this._props[name].value = false;
+                    !fromAttribute && this.removeAttribute(name);
+                }
+                break;
+            case 'number':
+                if (val && !parseInt(val).isNaN()) {
+                    this._props[name].value = val
+                    !fromAttribute && this.setAttribute(name, val);
+                } else {
+                    this._props[name].value = this._props[name].defaultValue;
+                    !fromAttribute && this.removeAttribute(name);
+                }
+                break;
+            case 'oneof':
+                const options = this._props[name].typeOptions;
+                if (val && options.includes(val)) {
+                    this._props[name].value = val
+                    !fromAttribute && this.setAttribute(name, val);
+                } else {
+                    this._props[name].value = this._props[name].defaultValue;
                     !fromAttribute && this.removeAttribute(name);
                 }
                 break;

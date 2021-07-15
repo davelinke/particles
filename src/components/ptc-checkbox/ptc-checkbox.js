@@ -6,10 +6,10 @@ class ParticleCheckbox extends Ptc {
     // observe properties
     static get observedAttributes() { return ['variant', 'href', 'target'] }
     attributeChangedCallback(name, oldValue, newValue) {
-        (name === 'disabled') ? this.toggleAriaDisabled() : this.setProp(name, newValue, true);
+        (name === 'disabled') ? this._toggleAriaDisabled() : this._setProp(name, newValue, true);
     }
 
-    toggleAriaDisabled() {
+    _toggleAriaDisabled() {
         this.setAttribute('aria-disabled', this.hasAttribute('disabled'));
     }
 
@@ -38,13 +38,13 @@ class ParticleCheckbox extends Ptc {
             }
         ]
 
-        this.initProps(props);
+        this._initProps(props);
 
         // attach shadow dom
         this._shadow = this.attachShadow({ mode: 'open' });
 
         // add styles
-        const styleElement = this.setupStyleElement(styles);
+        const styleElement = this._setupStyleElement(styles);
         this._shadow.append(styleElement);
 
         // create the html
@@ -60,27 +60,27 @@ class ParticleCheckbox extends Ptc {
                 e.stopPropagation();
                 return;
             }
-            this.toggle();
+            this._toggle();
         });
 
         this.addEventListener('keydown', (e)=>{
-            (e.code==="Space") && this.toggle();
+            (e.code==="Space") && this._toggle();
         })
     }
 
-    toggle(){
+    _toggle(){
         const disabled = this.hasAttribute('disabled');
         if(!disabled){
             this.checked = !this.checked;
-            this.setAria();
+            this._setAria();
         }
     }
-    setAria() {
+    _setAria() {
         this.setAttribute('aria-checked', this.indeterminate ? 'mixed' : this.checked);
     }
     connectedCallback() {
         this.setAttribute('role', 'checkbox');
-        this.setAria();
+        this._setAria();
     }
 }
 

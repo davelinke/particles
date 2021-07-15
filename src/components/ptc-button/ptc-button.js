@@ -3,6 +3,13 @@ import styles from './ptc-button.css.js';
 
 class PtcButton extends Ptc {
 
+    // observe properties
+    static get observedAttributes() { return ['variant', 'href', 'target', 'disabled'] }
+    attributeChangedCallback(name, oldValue, newValue) {
+        oldValue && false;
+        (name === 'disabled') ? this._toggleAriaDisabled() : this._setProp(name, newValue, true);
+    }
+
     // initialize
     constructor() {
         super();
@@ -40,13 +47,13 @@ class PtcButton extends Ptc {
             }
         ]
 
-        this.initProps(props);
+        this._initProps(props);
 
         // attach shadow dom
         this._shadow = this.attachShadow({ mode: 'open' });
 
         // add styles
-        const styleElement = this.setupStyleElement(styles)
+        const styleElement = this._setupStyleElement(styles)
         this._shadow.append(styleElement);
 
         // create the html
@@ -60,35 +67,28 @@ class PtcButton extends Ptc {
 
         (!this.getAttribute('tabindex')) && this.setAttribute('tabindex', 0);
 
-        this.toggleAriaDisabled();
+        this._toggleAriaDisabled();
 
         this.addEventListener('mousedown', () => {
             this.classList.add('active')
-        })
+        });
+
         this.addEventListener('mouseup', () => {
             this.classList.remove('active')
-        })
+        });
 
         // custom initialization of stuff
-        this.addEventListener('click', this.handleClick);
+        this.addEventListener('click', this._handleClick);
 
-
-        this.addEventListener('keydown', this.handleClick);
+        this.addEventListener('keydown', this._handleClick);
 
     }
 
-    // observe properties
-    static get observedAttributes() { return ['variant', 'href', 'target', 'disabled'] }
-    attributeChangedCallback(name, oldValue, newValue) {
-        (name === 'disabled') ? this.toggleAriaDisabled() : this.setProp(name, newValue, true);
-    }
-
-    toggleAriaDisabled() {
+    _toggleAriaDisabled() {
         this.setAttribute('aria-disabled', this.hasAttribute('disabled'));
     }
 
-    handleClick(e) {
-
+    _handleClick(e) {
         const isKeyDown = (e.type === 'keydown');
         const isCorrectKey = (isKeyDown && (e.code === 'Space')) || (isKeyDown && (e.code === 'Enter'));
 
@@ -133,9 +133,6 @@ class PtcButton extends Ptc {
             }
         }
     }
-
-    // on connect
-    connectedCallback() { }
 }
 
 export default PtcButton;
