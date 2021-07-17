@@ -9,8 +9,10 @@
     @include prop(button, $variant, color-success, $propertyName, $propertyState, $propertyValue);
 }
 
-//REGULAR
 
+/*
+ * The button itself
+ */
 :host {
     @include e(background-color, idle, $color-cta-idle);
     @include e(color, idle, $color-grayscale-max);
@@ -29,18 +31,28 @@
     cursor: pointer;
     display: inline-flex;
     align-items: center;
+    user-select: none;
 }
 
+/*
+ * Active State
+ */
 :host(.active) {
     @include e(background-color, active, $color-cta-active);
     @include e(border-color, active, $color-cta-active);
 }
 
+/*
+ * Selected State
+ */
 :host(:focus) {
     @include e(background-color, selected, $color-cta-selected);
     @include e(border-color, selected, $color-cta-selected);
 }
 
+/*
+ * Disabed State
+ */
 :host([disabled]),
 :host([disabled]:focus) {
     @include e(background-color, disabled, $color-disabled);
@@ -50,8 +62,9 @@
     cursor:not-allowed;
 }
 
-//COMPLETION
-
+/*
+ * The variant for process completion (usuallt green)
+ */
 :host([variant="completion"]) {
     @include v(completion, background-color, idle, $color-status-success-idle);
     @include v(completion, border-color, idle, $color-status-success-idle);
@@ -67,9 +80,9 @@
     @include v(completion, border-color, selected, $color-status-success-selected);
 }
 
-
-// SECONDARY
-
+/*
+ * The secondary variant of the button (less hirarchical visually speaking)
+ */
 :host([variant="secondary"]) {
     @include v(secondary, background-color, idle, $color-grayscale-max);
     @include v(secondary, color, idle, $color-cta-idle);
@@ -95,9 +108,9 @@
     @include v(secondary, background-color, selected, $color-grayscale-max);
 }
 
-
-// TEXT
-
+/*
+ * The simple text variant of the button
+ */
 :host([variant="text"]) {
     @include v(secondary, color, idle, $color-cta-idle);
     border: none;
@@ -118,7 +131,12 @@
     @include v(text, color, selected, $color-cta-selected);
 }
 
-@media (hover: hover) {
+
+
+/*
+ * all the hover states for devices with hover capabilities
+ */
+ @media (hover: hover) {
     :host(:hover) {
         @include e(background-color, selected, $color-cta-selected);
         @include e(border-color, selected, $color-cta-selected);

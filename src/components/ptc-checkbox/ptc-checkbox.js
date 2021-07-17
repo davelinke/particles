@@ -2,20 +2,21 @@ import Ptc from '../ptc/ptc.js'
 import styles from './ptc-checkbox.css.js';
 
 class ParticleCheckbox extends Ptc {
-    
-    // observe properties
-    static get observedAttributes() { return ['variant', 'href', 'target'] }
-    attributeChangedCallback(name, oldValue, newValue) {
-        (name === 'disabled') ? this._toggleAriaDisabled() : this._setProp(name, newValue, true);
-    }
 
-    _toggleAriaDisabled() {
-        this.setAttribute('aria-disabled', this.hasAttribute('disabled'));
-    }
+    // what attributes should we observe?
+    static get observedAttributes() { return ['disabled'] }
 
     constructor() {
         super();
         const props = [
+            {
+                name: 'disabled',
+                defaultValue: false,
+                type: 'boolean',
+                onAttrChange: () => {
+                    this._toggleAriaDisabled();
+                }
+            },
             {
                 name: 'status',
                 defaultValue: null,
@@ -63,14 +64,18 @@ class ParticleCheckbox extends Ptc {
             this._toggle();
         });
 
-        this.addEventListener('keydown', (e)=>{
-            (e.code==="Space") && this._toggle();
+        this.addEventListener('keydown', (e) => {
+            (e.code === "Space") && this._toggle();
         })
     }
 
-    _toggle(){
+    _toggleAriaDisabled() {
+        this.setAttribute('aria-disabled', this.hasAttribute('disabled'));
+    }
+
+    _toggle() {
         const disabled = this.hasAttribute('disabled');
-        if(!disabled){
+        if (!disabled) {
             this.checked = !this.checked;
             this._setAria();
         }
