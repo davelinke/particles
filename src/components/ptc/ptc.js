@@ -83,6 +83,7 @@ class Ptc extends HTMLElement {
         const type = this._props[name].type;
 
         switch (type) {
+
             // if the declared property type is a boolean
             case 'boolean':
                 if (val) {
@@ -93,9 +94,10 @@ class Ptc extends HTMLElement {
                     !fromAttribute && this.removeAttribute(name);
                 }
                 break;
+
             // if the declared property type is a number
             case 'number':
-                if (val && !parseInt(val).isNaN()) {
+                if (val && !isNaN(parseInt(val))) {
                     this._props[name].value = val
                     !fromAttribute && this.setAttribute(name, val);
                 } else {
@@ -103,6 +105,7 @@ class Ptc extends HTMLElement {
                     !fromAttribute && this.removeAttribute(name);
                 }
                 break;
+
             // if the declared property type is a one of an array of possible values
             case 'oneof':
                 if (val && this._props[name].typeOptions.includes(val)) {
@@ -113,6 +116,7 @@ class Ptc extends HTMLElement {
                     !fromAttribute && this.removeAttribute(name);
                 }
                 break;
+                
             // we default for if the declared property type is a string
             default:
                 if (val) {

@@ -6,7 +6,7 @@ class PtcButton extends Ptc {
     /**
      * button attributes to be observed 
      */
-    static get observedAttributes() { return ['variant', 'href', 'target', 'disabled'] }
+    static get observedAttributes() { return ['variant', 'href', 'target', 'disabled', 'elevation'] }
 
     /**
      * the button constructor
@@ -14,7 +14,8 @@ class PtcButton extends Ptc {
     constructor() {
         super();
 
-        const props = [
+        // initalize all the button properties
+        this._initProps([
             {
                 // to enable or disable a button
                 name: 'disabled',
@@ -53,7 +54,8 @@ class PtcButton extends Ptc {
                 // the elevation defines a visual effect of drop shadow to simulate z axis elevation
                 name: 'elevation',
                 defaultValue: null,
-                type: 'number'
+                type: 'number',
+                onAttrChange: (newValue) => { this._setProp('elevation', newValue, true) }
             },
             {
                 // the type of the button, simple button or submit button
@@ -61,10 +63,7 @@ class PtcButton extends Ptc {
                 defaultValue: 'button',
                 tyle: 'string'
             }
-        ]
-
-        // initalize all the button properties
-        this._initProps(props);
+        ]);
 
         // attach shadow dom
         this._shadow = this.attachShadow({ mode: 'open' });
@@ -82,6 +81,7 @@ class PtcButton extends Ptc {
         // set the role forcefully for accessibility
         !this.getAttribute('role') && this.setAttribute('role', this.role);
 
+        // since it its a button, it should be focusable by default
         (!this.getAttribute('tabindex')) && this.setAttribute('tabindex', 0);
 
         // set the adequate aria disabled attribute

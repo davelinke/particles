@@ -3,8 +3,10 @@ import styles from './ptc-input.css.js';
 
 class PtcInput extends Ptc {
 
-    // initialize
-    constructor() {
+    /**
+     * the input constructor
+     */
+     constructor() {
         super();
 
         // define all properties
