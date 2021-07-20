@@ -4,7 +4,7 @@ import styles from './ptc-card.css.js';
 class ParticleCard extends Ptc {
 
     /**
-     * button attributes to be observed 
+     * card attributes to be observed 
      */
     static get observedAttributes() { return ['elevation'] }
 
