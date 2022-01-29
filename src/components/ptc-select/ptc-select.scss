@@ -1,0 +1,34 @@
+:host{
+    display: inline-block;
+}
+.box{
+    background-color: var(--ptc-select__background-color--idle, var(--ptc-input__background-color--idle, #fff));
+    color: var(--ptc-select__color--idle, var(--ptc-input__color--idle, #404040));
+    padding: var(--ptc-select__padding--idle, var(--ptc-input__padding--idle, 0.5rem 0));
+    height: var(--ptc-select__height--idle, var(--ptc-input__height--idle, 2.125rem));
+    margin: var(--ptc-select__margin--idle, var(--ptc-input__margin--idle, 0));
+    font-weight: var(--ptc-select__font-weight--idle, var(--ptc-input__font-weight--idle, 400));
+    font-size: var(--ptc-select__font-size--idle, var(--ptc-input__font-size--idle, 1rem));
+    border-color: var(--ptc-select__border-color--idle, var(--ptc-input__border-color--idle, gray));
+    border-width: var(--ptc-select__border-width--idle, var(--ptc-input__border-width--idle, 1px));
+    border-style: var(--ptc-select__border-style--idle, var(--ptc-input__border-style--idle, solid));
+    border-radius: var(--ptc-select__border-radius--idle, var(--ptc-input__border-radius--idle, 0));
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+}
+
+.dropdown{
+    position: absolute;
+    z-index: 9999;
+    max-height: 300px;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+
+    &__scroller{
+        overflow-y: auto;
+        overflow-x: hidden;
+        flex:1 1 auto;
+    }
+}
