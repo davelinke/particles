@@ -4,12 +4,12 @@ import styles from './ptc-option.css.js';
 class ParticleOption extends Ptc {
 
     /**
-     * card attributes to be observed 
+     * option attributes to be observed 
      */
     static get observedAttributes() { return [] }
 
     /**
-     * the card constructor
+     * the option constructor
      */
     constructor() {
         super();

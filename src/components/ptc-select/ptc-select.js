@@ -4,12 +4,12 @@ import styles from './ptc-select.css.js';
 class ParticleSelect extends Ptc {
 
     /**
-     * card attributes to be observed 
+     * select attributes to be observed 
      */
-    static get observedAttributes() { return [] }
+    static get observedAttributes() { return ['value'] }
 
     /**
-     * the card constructor
+     * the select constructor
      */
     constructor() {
         super();
@@ -36,12 +36,15 @@ class ParticleSelect extends Ptc {
         }
         this.addEventListener('focus', this._handleFocus)
 
+
         // attach shadow dom
         this._shadow = this.attachShadow({ mode: 'open' });
+
 
         // add styles
         const styleElement = this._setupStyleElement(styles)
         this._shadow.append(styleElement);
+
 
         // create the clicker element
         const box = document.createElement('div');
@@ -50,12 +53,14 @@ class ParticleSelect extends Ptc {
 
         box.addEventListener('click', this.toggle.bind(this));
 
+
         // create the output window
         const boxOutput = document.createElement('div');
         boxOutput.classList.add('box__output');
         boxOutput.innerHTML = 'select';
 
         box.append(boxOutput);
+
 
         // create the chevron
         const chevron = document.createElement('div');
@@ -75,46 +80,71 @@ class ParticleSelect extends Ptc {
         >
             <polyline points="6 9 12 15 18 9"></polyline>
         </svg>`;
+
         box.append(chevron)
+
 
         // create the dropdown
         const dropdown = document.createElement('div');
         dropdown.classList.add('dropdown');
+
         // add the dropdown to the state so we can access it later
         this._dropdown = dropdown;
+
+        // and if prop open is true, then show the dropdown
         if (this.open) {
             dropdown.classList.add('dropdown--open');
         }
+
+
         // create the dropdown list
         const dropdownScroller = document.createElement('div');
         dropdownScroller.classList.add('dropdown__scroller');
 
         dropdown.appendChild(dropdownScroller);
-        dropdownScroller.append(slot);
+
 
         // create the slot for the options
         const slot = document.createElement('slot');
+        dropdownScroller.append(slot);
+
         this._shadow.append(dropdown);
     }
 
+
+    /**
+     * a method to handle what happens when we focus the component
+     */
     _handleFocus() {
         // let's start keystroke listening to emulate an actual select
     }
 
+
+    /**
+     * the method to toggle the options
+     */
     toggle() {
         if (this._isOpen) {
-            this.close();
+            this.hideOptions();
         } else {
-            this.open();
+            this.showOptions();
         }
 
     }
 
+
+    /**
+     * the method to show the options
+     */
     showOptions() {
         this._isOpen = true;
         this._dropdown.classList.add('visible');
     }
 
+
+    /**
+     * the method to hide the options
+     */
     hideOptions() {
         this._isOpen = false;
         this._dropdown.classList.remove('visible');
