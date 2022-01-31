@@ -1,5 +1,6 @@
 :host{
-    display: inline-block;
+    display: inline-flex;
+    outline: none;
 }
 .box{
     background-color: var(--ptc-select__background-color--idle, var(--ptc-input__background-color--idle, #fff));
@@ -16,15 +17,54 @@
     display: inline-block;
     position: relative;
     overflow: hidden;
+
+    min-width: 175px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem 0.5rem;
+    box-sizing: border-box;
+
+    cursor: pointer;
+
+    &__output{
+        flex: 1 1 auto;
+        pointer-events: none;
+        user-select: none;
+    }
+}
+
+.chevron{
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+
+    svg {
+        stroke: #1d697b;
+    }
 }
 
 .dropdown{
     position: absolute;
+    margin-block-start: 52px;
     z-index: 9999;
     max-height: 300px;
     background-color: #fff;
     display: flex;
     flex-direction: column;
+
+    opacity: 0;
+    transform: scaleY(1);
+    pointer-events: none;
+    min-width: 175px;
+
+    &.visible{
+        opacity: 1;
+        transform: scaleY(1);
+        pointer-events: all;
+    }
 
     &__scroller{
         overflow-y: auto;
