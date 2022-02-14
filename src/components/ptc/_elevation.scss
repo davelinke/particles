@@ -1,14 +1,26 @@
-$shadowColor: rgba(0,0,0,0.35);
+@import "variables";
 
-:host([elevation="1"]) {
+@mixin elevation-1() {
     box-shadow: var(--ptc-elevation__one-shadow-horizontal, 0) var(--ptc-elevation__one-shadow-vertical, 2px)
         var(--ptc-elevation__one-shadow-blur, 3px) var(--ptc-elevation__one-shadow-color, $shadowColor);
 }
-:host([elevation="2"]) {
+
+@mixin elevation-2() {
     box-shadow: var(--ptc-elevation__two-shadow-horizontal, 0) var(--ptc-elevation__two-shadow-vertical, 4px)
         var(--ptc-elevation__two-shadow-blur, 5px) var(--ptc-elevation__two-shadow-color, $shadowColor);
 }
+
+@mixin elevation-3() {
+    box-shadow: var(--ptc-elevation__three-shadow-horizontal, 0) var(--ptc-elevation__three-shadow-vertical, 8px)
+        var(--ptc-elevation__three-shadow-blur, 8px) var(--ptc-elevation__three-shadow-color, $shadowColor);
+}
+
+:host([elevation="1"]) {
+    @include elevation-1();
+}
+:host([elevation="2"]) {
+    @include elevation-2();
+}
 :host([elevation="3"]) {
-    box-shadow: var(--ptc-elevation__two-shadow-horizontal, 0) var(--ptc-elevation__two-shadow-vertical, 8px)
-        var(--ptc-elevation__two-shadow-blur, 8px) var(--ptc-elevation__two-shadow-color, $shadowColor);
+    @include elevation-3();
 }
