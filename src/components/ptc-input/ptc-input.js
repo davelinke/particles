@@ -119,6 +119,13 @@ class PtcInput extends Ptc {
     */
     _setValue(e) {
         this.value = e.target.value;
+
+
+        // fire up the change event
+        this.dispatchEvent(new CustomEvent('ptc-change', {
+            bubbles: true,
+            detail: this.value
+        }));
     }
 
     /*

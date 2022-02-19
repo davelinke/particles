@@ -16,6 +16,9 @@ $color-cta-idle: #238196;
 $color-cta-selected: #2b9eb8;
 $color-cta-active: #1d697b;
 
+$color-highlights: rgba(43, 158, 184, 0.133); // #2b9eb822;
+$color-backdrops: rgba(0,0,0,0.5);
+
 $color-disabled: $color-grayscale-50;
 
 $color-input-border-idle: $color-grayscale-50;
@@ -28,4 +31,4 @@ $elements-input-border-width: 1px;
 
 $elements-disabled-opacity:0.6;
 
-$shadowColor: rgba(0,0,0,0.35);
+$color-shadows: rgba(0,0,0,0.35);

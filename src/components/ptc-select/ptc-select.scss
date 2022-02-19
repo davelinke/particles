@@ -1,5 +1,6 @@
 @import "../ptc/ptc";
 @import "../ptc/elevation";
+@import "../ptc/scrollbars";
 
 //prop($element, $variant, $generic, $propertyName, $propertyState, $propertyValue)
 
@@ -7,11 +8,11 @@
     @include prop(select, null, input, $propertyName, $propertyState, $propertyValue);
 }
 
-:host{
+:host {
     display: inline-flex;
     outline: none;
 }
-.box{
+.box {
     @include p(background-color, idle, $color-grayscale-max);
     @include p(color, idle, $color-grayscale-25);
     @include p(padding, idle, 0.5rem 0);
@@ -36,14 +37,14 @@
 
     cursor: pointer;
 
-    &__output{
+    &__output {
         flex: 1 1 auto;
         pointer-events: none;
         user-select: none;
     }
 }
 
-.chevron{
+.chevron {
     flex: 0 0 auto;
     display: flex;
     align-items: center;
@@ -51,11 +52,12 @@
     pointer-events: none;
 
     svg {
+        transition: transform 0.2s ease-in-out;
         @include prop(select-chevron, null, input-helper, stroke, idle, $color-cta-idle);
     }
 }
 
-.dropdown{
+.dropdown {
     position: absolute;
     margin-block-start: 34px;
     z-index: 9999;
@@ -66,19 +68,52 @@
     flex-direction: column;
 
     opacity: 0;
-    transform: scaleY(1);
+    transform: scaleY(0.5);
+    transform-origin: top;
     pointer-events: none;
     min-width: 175px;
+    transition: opacity 150ms ease-in-out, transform 150ms ease-in-out;
 
-    &.visible{
+    &__backdrop {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: transparent;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.1s ease-in-out;
+        z-index: 9999;
+    }
+
+    &__scroller {
+        overflow-y: auto;
+        overflow-x: hidden;
+        flex: 1 1 auto;
+    }
+}
+
+:host(.open) {
+    .chevron {
+        svg {
+            transform: rotate(-180deg);
+        }
+    }
+    .dropdown {
         opacity: 1;
         transform: scaleY(1);
         pointer-events: all;
-    }
 
-    &__scroller{
-        overflow-y: auto;
-        overflow-x: hidden;
-        flex:1 1 auto;
+        &__backdrop {
+            opacity: 1;
+            pointer-events: all;
+        }
+    }
+}
+
+:host(.has-value){
+    .box{
+        @include p(color, idle, $color-grayscale-min);
     }
 }

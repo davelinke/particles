@@ -9,9 +9,8 @@ LoadParticles(['ptc-button', 'ptc-card', 'ptc-content', 'ptc-checkbox', 'ptc-inp
             console.log('blur')
         }, true)
     })
-    const feather = feather || undefined;
-    if (feather) {
-        feather.replace({
+    if (window.feather) {
+        window.feather.replace({
             'stroke-width': 2,
             width: 22,
             height: 22

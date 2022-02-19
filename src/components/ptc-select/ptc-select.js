@@ -17,6 +17,8 @@ class ParticleSelect extends Ptc {
         // state
         this._isOpen = false;
 
+        this._options = [];
+
         // initalize all the card properties
         this._initProps([{
             name: 'value',
@@ -59,6 +61,8 @@ class ParticleSelect extends Ptc {
         boxOutput.classList.add('box__output');
         boxOutput.innerHTML = 'select';
 
+        this._boxOutput = boxOutput;
+
         box.append(boxOutput);
 
 
@@ -83,6 +87,13 @@ class ParticleSelect extends Ptc {
 
         box.append(chevron)
 
+        // create the backdrop
+        const backdrop = document.createElement('div');
+        backdrop.classList.add('dropdown__backdrop');
+        backdrop.addEventListener('click', this.hideOptions.bind(this));
+
+        this._shadow.append(backdrop);
+
 
         // create the dropdown
         const dropdown = document.createElement('div');
@@ -96,7 +107,6 @@ class ParticleSelect extends Ptc {
             dropdown.classList.add('dropdown--open');
         }
 
-
         // create the dropdown list
         const dropdownScroller = document.createElement('div');
         dropdownScroller.classList.add('dropdown__scroller');
@@ -109,6 +119,13 @@ class ParticleSelect extends Ptc {
         dropdownScroller.append(slot);
 
         this._shadow.append(dropdown);
+
+
+        // handle the selection
+        this.addEventListener('ptc-option-selected', this._handleOptionSelection.bind(this));
+
+        // handle the adding of an option
+        this.addEventListener('ptc-option-connected', this._handleOptionConnected.bind(this));
     }
 
 
@@ -121,6 +138,42 @@ class ParticleSelect extends Ptc {
 
 
     /**
+     * a method to handle what happens when we select an option
+     */
+    _handleOptionSelection(e) {
+        e.stopPropagation();
+
+        const option = e.detail;
+        this.value = option.state.value;
+        this.classList.add('has-value');
+        this._boxOutput.innerText = option.state.label;
+        this.hideOptions();
+
+        // fire up the change event
+        this.dispatchEvent(new CustomEvent('ptc-change', {
+            bubbles: true,
+            detail: this.value
+        }));
+    }
+
+
+    /**
+     * a method to handle an option being added to the slot
+     */
+    _handleOptionConnected(e) {
+        // let's start keystroke listening to emulate an actual select
+        this._options.push(e.detail.state);
+        e.detail.cleanOnDisconnect = () => {
+            this._options.forEach((option, index) => {
+                if (option === e.detail.state) {
+                    this._options.splice(index, 1);
+                }
+            })
+        };
+    }
+
+
+    /**
      * the method to toggle the options
      */
     toggle() {
@@ -129,7 +182,6 @@ class ParticleSelect extends Ptc {
         } else {
             this.showOptions();
         }
-
     }
 
 
@@ -138,7 +190,7 @@ class ParticleSelect extends Ptc {
      */
     showOptions() {
         this._isOpen = true;
-        this._dropdown.classList.add('visible');
+        this.classList.add('open');
     }
 
 
@@ -147,7 +199,7 @@ class ParticleSelect extends Ptc {
      */
     hideOptions() {
         this._isOpen = false;
-        this._dropdown.classList.remove('visible');
+        this.classList.remove('open');
     }
 }
 

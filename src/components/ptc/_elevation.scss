@@ -2,17 +2,17 @@
 
 @mixin elevation-1() {
     box-shadow: var(--ptc-elevation__one-shadow-horizontal, 0) var(--ptc-elevation__one-shadow-vertical, 2px)
-        var(--ptc-elevation__one-shadow-blur, 3px) var(--ptc-elevation__one-shadow-color, $shadowColor);
+        var(--ptc-elevation__one-shadow-blur, 3px) var(--ptc-elevation__one-shadow-color, $color-shadows);
 }
 
 @mixin elevation-2() {
     box-shadow: var(--ptc-elevation__two-shadow-horizontal, 0) var(--ptc-elevation__two-shadow-vertical, 4px)
-        var(--ptc-elevation__two-shadow-blur, 5px) var(--ptc-elevation__two-shadow-color, $shadowColor);
+        var(--ptc-elevation__two-shadow-blur, 5px) var(--ptc-elevation__two-shadow-color, $color-shadows);
 }
 
 @mixin elevation-3() {
     box-shadow: var(--ptc-elevation__three-shadow-horizontal, 0) var(--ptc-elevation__three-shadow-vertical, 8px)
-        var(--ptc-elevation__three-shadow-blur, 8px) var(--ptc-elevation__three-shadow-color, $shadowColor);
+        var(--ptc-elevation__three-shadow-blur, 8px) var(--ptc-elevation__three-shadow-color, $color-shadows);
 }
 
 :host([elevation="1"]) {
