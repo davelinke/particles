@@ -100,6 +100,12 @@ class ParticleCheckbox extends Ptc {
         if (!disabled) {
             this.checked = !this.checked;
             this._setAria();
+
+            // fire up the change event
+            this.dispatchEvent(new CustomEvent('ptc-change', {
+                bubbles: true,
+                detail: this.checked
+            }));
         }
     }
 

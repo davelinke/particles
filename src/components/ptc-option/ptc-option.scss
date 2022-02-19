@@ -1,0 +1,18 @@
+@import "../ptc/ptc";
+
+@mixin e($propertyName, $propertyState, $propertyValue) {
+    @include prop(select-option, null, highlighted, $propertyName, $propertyState, $propertyValue);
+}
+
+:host{
+    display:block;
+    padding: 0.625rem 0.5rem;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+@media (hover: hover) {
+    :host(:hover) {
+        @include e(background-color, hover, $color-highlights);
+    }
+}
