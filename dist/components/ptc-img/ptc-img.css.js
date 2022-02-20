@@ -1,0 +1,1 @@
+export default `:host{display:inline;width:fit-content}`

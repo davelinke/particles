@@ -1,11 +1,11 @@
 const path = require('path');
 const chokidar = require('chokidar');
 
-const parseCSS = require('./node-scripts/parseCSS.module').parseCss;
-const parseSCSS = require('./node-scripts/parseSCSS.module').parseSCSS;
-const parseHTML = require('./node-scripts/parseHTML.module').parseHTML;
-const parseJs = require('./node-scripts/parseJs.module').parseJs;
-const { copyAsset, deleteAsset } = require('./node-scripts/utils.module');
+const parseCSS = require('./parseCSS.module').parseCss;
+const parseSCSS = require('./parseSCSS.module').parseSCSS;
+const parseHTML = require('./parseHTML.module').parseHTML;
+const parseJs = require('./parseJs.module').parseJs;
+const { copyAsset, deleteAsset } = require('./utils.module');
 
 const folder = process.argv[1].replace('index.js', '');
 const srcFolder = folder + 'src';

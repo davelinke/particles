@@ -16,6 +16,6 @@
     "terser": "^5.7.0"
   },
   "scripts": {
-    "start": "node index.js"
+    "start": "node node-scripts/index.js"
   }
 }
