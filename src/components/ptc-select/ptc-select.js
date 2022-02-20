@@ -19,6 +19,10 @@ class ParticleSelect extends Ptc {
 
         this._options = [];
 
+        this._keyQuery = '';
+
+        this._keyQueryTimeout = null;
+
         // initalize all the card properties
         this._initProps([{
             name: 'value',
@@ -54,7 +58,7 @@ class ParticleSelect extends Ptc {
         box.classList.add('box');
         this._shadow.append(box);
 
-        box.addEventListener('click', this.toggle.bind(this));
+        box.addEventListener('click', this.toggle);
 
 
         // create the output window
@@ -91,7 +95,7 @@ class ParticleSelect extends Ptc {
         // create the backdrop
         const backdrop = document.createElement('div');
         backdrop.classList.add('dropdown__backdrop');
-        backdrop.addEventListener('click', this.hideOptions.bind(this));
+        backdrop.addEventListener('click', this.hideOptions);
 
         this._shadow.append(backdrop);
 
@@ -123,19 +127,19 @@ class ParticleSelect extends Ptc {
 
 
         // handle the selection
-        this.addEventListener('ptc-option-selected', this._handleOptionSelection.bind(this));
+        this.addEventListener('ptc-option-selected', this._handleOptionSelection);
 
         // handle the adding of an option
-        this.addEventListener('ptc-option-connected', this._handleOptionConnected.bind(this));
+        this.addEventListener('ptc-option-connected', this._handleOptionConnected);
 
         // handle the mouseover of an option
-        this.addEventListener('ptc-option-mouseover', this._handleOptionMouseover.bind(this));
+        this.addEventListener('ptc-option-mouseover', this._handleOptionMouseover);
     }
 
     /**
      * a method that handles an option being hovered
      */
-    _handleOptionMouseover(e) {
+    _handleOptionMouseover = (e) => {
         // let's highlight the option
         const option = e.detail;
         this._highlightOption(option);
@@ -209,20 +213,42 @@ class ParticleSelect extends Ptc {
             this._highlightOption(nextOption, highlightedOption);
 
             nextOption.scrollIntoView({ block: 'nearest' });
+        },
+        default: (key) => {
+            // if it's open, then search for the first option that starts with the key
+            // if it's not open, then search for the first option that starts with the key
+            // if it's not found, then do nothing
+
+            // todo - add an event listener to be able to focus not only with one character
+            
+            if (!this._isOpen) return;
+
+            const isChar = (key.length === 1);
+
+            if (isChar) {
+                const keyChar = key.toLowerCase();
+                const options = this._options.filter(option => option.innerText.toLowerCase().startsWith(keyChar));
+                if (options.length) {
+                    const option = options[0];
+                    this._highlightOption(option);
+                    option.scrollIntoView({ block: 'nearest' });
+                }
+            }
+
         }
     }
 
     /**
      * a method to get the option highlighted
      */
-    _getHighlightedOption() {
+    _getHighlightedOption = () => {
         return this._options.find(option => option.highlighted);
     }
 
     /**
      * a method to unhighlight an option
      */
-    _unhighlightOption(optionToUnhighlight) {
+    _unhighlightOption = (optionToUnhighlight) => {
         // look for a highlighted option and unhighlight it
         optionToUnhighlight && (optionToUnhighlight.highlighted = false);
     }
@@ -230,7 +256,7 @@ class ParticleSelect extends Ptc {
     /**
      * a method to highlight an option
      */
-    _highlightOption(optionToHighlight, optionToUnhighlight = null) {
+    _highlightOption = (optionToHighlight, optionToUnhighlight = null) => {
         // look for a highlighted option and unhighlight it
         !optionToUnhighlight && (optionToUnhighlight = this._getHighlightedOption());
         optionToUnhighlight && this._unhighlightOption(optionToUnhighlight);
@@ -244,14 +270,14 @@ class ParticleSelect extends Ptc {
     /**
      * a method to handle what happens when we focus the component
      */
-    _handleFocus() {
+    _handleFocus = () => {
         // let's start keystroke listening to emulate an actual select
-        this.addEventListener('keydown', this._handleKeyDown.bind(this));
+        this.addEventListener('keydown', this._handleKeyDown);
     }
     /**
      * a method to handle what happens when we focus the component
      */
-    _handleBlur() {
+    _handleBlur = () => {
         // let's start keystroke listening to emulate an actual select
         this.removeEventListener('keydown', this._handleKeyDown);
     }
@@ -259,19 +285,21 @@ class ParticleSelect extends Ptc {
     /**
      * a method to handle what happens when we type while focused
      */
-    _handleKeyDown(e) {
+    _handleKeyDown = (e) => {
         // let's start keystroke listening to emulate an actual select
         const key = e.key;
         console.log(key);
 
-        this._keyMethods[key] && this._keyMethods[key]();
+        if (this._keyMethods[key]) return this._keyMethods[key](e);
+
+        this._keyMethods.default(key);
     }
 
 
     /**
      * a method to handle what happens when we select an option
      */
-    _handleOptionSelection(e) {
+    _handleOptionSelection = (e) => {
         e.stopPropagation();
 
         const option = e.detail;
@@ -291,7 +319,7 @@ class ParticleSelect extends Ptc {
     /**
      * a method to handle an option being added to the slot
      */
-    _handleOptionConnected(e) {
+    _handleOptionConnected = (e) => {
         // let's start keystroke listening to emulate an actual select
         this._options.push(e.detail);
         e.detail.cleanOnDisconnect = () => {
@@ -307,7 +335,7 @@ class ParticleSelect extends Ptc {
     /**
      * the method to toggle the options
      */
-    toggle() {
+    toggle = () => {
         if (this._isOpen) {
             this.hideOptions();
         } else {
@@ -319,7 +347,7 @@ class ParticleSelect extends Ptc {
     /**
      * the method to show the options
      */
-    showOptions() {
+    showOptions = () => {
         this._isOpen = true;
         this.classList.add('open');
     }
@@ -328,7 +356,7 @@ class ParticleSelect extends Ptc {
     /**
      * the method to hide the options
      */
-    hideOptions() {
+    hideOptions = () => {
         this._isOpen = false;
         this.classList.remove('open');
     }
