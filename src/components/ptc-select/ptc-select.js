@@ -37,6 +37,7 @@ class ParticleSelect extends Ptc {
             this.tabIndex = 0;
         }
         this.addEventListener('focus', this._handleFocus)
+        this.addEventListener('blur', this._handleBlur)
 
 
         // attach shadow dom
@@ -126,6 +127,117 @@ class ParticleSelect extends Ptc {
 
         // handle the adding of an option
         this.addEventListener('ptc-option-connected', this._handleOptionConnected.bind(this));
+
+        // handle the mouseover of an option
+        this.addEventListener('ptc-option-mouseover', this._handleOptionMouseover.bind(this));
+    }
+
+    /**
+     * a method that handles an option being hovered
+     */
+    _handleOptionMouseover(e) {
+        // let's highlight the option
+        const option = e.detail;
+        this._highlightOption(option);
+    }
+
+    /**
+     * the methods that define how to handle the keystrokes
+     */
+    _keyMethods = {
+        'Enter': () => {
+            // if it's open, then select the option highlighted
+            const highlightedOption = this._getHighlightedOption();
+            if (this._isOpen) {
+                highlightedOption && highlightedOption.select();
+            } else {
+
+            // then close
+            this.toggle();
+            }
+
+        },
+        'Escape': () => {
+            // just close without selecting nothing
+            this.hideOptions();
+        },
+        'ArrowDown': () => {
+            // check the option that's highlighted and highlight the next one
+            // if there is no highlighted option, then highlight the first one
+            // if the last option is highlighted, then highlight the first one
+
+            // if there are no options, then do nothing
+            if (!this._options.length) return;
+
+            if (!this._isOpen) return this.toggle();
+
+            const highlightedOption = this._getHighlightedOption();
+            let nextOption = null;
+            if (highlightedOption) {
+                const index = this._options.indexOf(highlightedOption);
+                const nextIndex = index + 1;
+                nextOption = this._options[nextIndex];
+            }
+
+            !nextOption && (nextOption = this._options[0]);
+
+            this._highlightOption(nextOption, highlightedOption);
+
+            nextOption.scrollIntoView({ block: 'nearest' });
+        },
+        'ArrowUp': () => {
+            // check the option that's highlighted and highlight the next one
+            // if there is no highlighted option, then highlight the first one
+            // if the first option is highlighted, then highlight the last one
+
+            // if there are no options, then do nothing
+            if (!this._options.length) return;
+
+            if(!this._isOpen) return;
+
+            const highlightedOption = this._getHighlightedOption();
+            let nextOption = null;
+
+            if (highlightedOption) {
+                const index = this._options.indexOf(highlightedOption);
+                const nextIndex = index - 1;
+                nextOption = this._options[nextIndex];
+            }
+
+            !nextOption && (nextOption = this._options[this._options.length - 1]);
+
+            this._highlightOption(nextOption, highlightedOption);
+
+            nextOption.scrollIntoView({ block: 'nearest' });
+        }
+    }
+
+    /**
+     * a method to get the option highlighted
+     */
+    _getHighlightedOption() {
+        return this._options.find(option => option.highlighted);
+    }
+
+    /**
+     * a method to unhighlight an option
+     */
+    _unhighlightOption(optionToUnhighlight) {
+        // look for a highlighted option and unhighlight it
+        optionToUnhighlight && (optionToUnhighlight.highlighted = false);
+    }
+
+    /**
+     * a method to highlight an option
+     */
+    _highlightOption(optionToHighlight, optionToUnhighlight = null) {
+        // look for a highlighted option and unhighlight it
+        !optionToUnhighlight && (optionToUnhighlight = this._getHighlightedOption());
+        optionToUnhighlight && this._unhighlightOption(optionToUnhighlight);
+
+        // highlight the new option
+        optionToHighlight && (optionToHighlight.highlighted = true);
+
     }
 
 
@@ -134,6 +246,25 @@ class ParticleSelect extends Ptc {
      */
     _handleFocus() {
         // let's start keystroke listening to emulate an actual select
+        this.addEventListener('keydown', this._handleKeyDown.bind(this));
+    }
+    /**
+     * a method to handle what happens when we focus the component
+     */
+    _handleBlur() {
+        // let's start keystroke listening to emulate an actual select
+        this.removeEventListener('keydown', this._handleKeyDown);
+    }
+
+    /**
+     * a method to handle what happens when we type while focused
+     */
+    _handleKeyDown(e) {
+        // let's start keystroke listening to emulate an actual select
+        const key = e.key;
+        console.log(key);
+
+        this._keyMethods[key] && this._keyMethods[key]();
     }
 
 
@@ -144,9 +275,9 @@ class ParticleSelect extends Ptc {
         e.stopPropagation();
 
         const option = e.detail;
-        this.value = option.state.value;
+        this.value = option.value;
         this.classList.add('has-value');
-        this._boxOutput.innerText = option.state.label;
+        this._boxOutput.innerText = option.innerText;
         this.hideOptions();
 
         // fire up the change event
@@ -162,10 +293,10 @@ class ParticleSelect extends Ptc {
      */
     _handleOptionConnected(e) {
         // let's start keystroke listening to emulate an actual select
-        this._options.push(e.detail.state);
+        this._options.push(e.detail);
         e.detail.cleanOnDisconnect = () => {
             this._options.forEach((option, index) => {
-                if (option === e.detail.state) {
+                if (option === e.detail) {
                     this._options.splice(index, 1);
                 }
             })

@@ -44,6 +44,13 @@
     }
 }
 
+:host(:focus),
+:host(:hover){
+    .box{
+        @include p(border-color, selected, $color-input-border-selected);
+    }
+}
+
 .chevron {
     flex: 0 0 auto;
     display: flex;
