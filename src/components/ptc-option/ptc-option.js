@@ -19,7 +19,20 @@ class ParticleOption extends Ptc {
             name: 'value',
             defaultValue: null,
             type: 'string'
-        }]);
+        },{
+            name: 'highlighted',
+            defaultValue: false,
+            type: 'boolean'
+        },{
+            name: 'selected',
+            defaultValue: false,
+            type: 'boolean'
+        },{
+            name: 'disabled',
+            defaultValue: false,
+            type: 'boolean'
+        }
+    ]);
 
         // attach shadow dom
         this._shadow = this.attachShadow({ mode: 'open' });
@@ -38,6 +51,8 @@ class ParticleOption extends Ptc {
 
         // define the click behavior
         this.addEventListener('click', this.select.bind(this));
+
+        this.addEventListener('mouseover', this._handleMouseOver.bind(this));
     }
 
     /**
@@ -49,20 +64,21 @@ class ParticleOption extends Ptc {
      * @todo add the option to the select
      */
     select(e) {
-        this.state.selected = 'true';
+        this.selected = true;
         this.dispatchEvent(new CustomEvent('ptc-option-selected', {
             bubbles: true,
             detail: this
         }));
     }
 
+    _handleMouseOver(e) {
+        this.dispatchEvent(new CustomEvent('ptc-option-mouseover', {
+            bubbles: true,
+            detail: this
+        }));
+    }
+
     connectedCallback() {
-        this.state = {
-            value: this.value,
-            selected: this.selected,
-            disabled: this.disabled,
-            label: this.innerText
-        }
         // fire an event to handshake with the select
         this.dispatchEvent(new CustomEvent('ptc-option-connected', {
             bubbles: true,

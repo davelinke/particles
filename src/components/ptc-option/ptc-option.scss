@@ -10,9 +10,6 @@
     box-sizing: border-box;
     cursor: pointer;
 }
-
-@media (hover: hover) {
-    :host(:hover) {
-        @include e(background-color, hover, $color-highlights);
-    }
+:host([highlighted]){
+    @include e(background-color, hover, $color-highlights);
 }
