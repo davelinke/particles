@@ -1,5 +1,5 @@
 import Ptc from '../ptc/ptc.js'
-import styles from './ptc-select.css.js';
+import styles from './ptc-select.scss';
 
 class ParticleSelect extends Ptc {
 
@@ -18,6 +18,10 @@ class ParticleSelect extends Ptc {
         this._isOpen = false;
 
         this._options = [];
+
+        this._keyQuery = '';
+
+        this._keyQueryTimeout = null;
 
         this._keyQuery = '';
 
@@ -220,18 +224,36 @@ class ParticleSelect extends Ptc {
             // if it's not found, then do nothing
 
             // todo - add an event listener to be able to focus not only with one character
-            
-            if (!this._isOpen) return;
 
             const isChar = (key.length === 1);
 
             if (isChar) {
+
                 const keyChar = key.toLowerCase();
-                const options = this._options.filter(option => option.innerText.toLowerCase().startsWith(keyChar));
+
+                if (this._keyQueryTimeout) {
+                    clearTimeout(this._keyQueryTimeout);
+                }
+
+                this._keyQuery = this._keyQuery + keyChar;
+
+                this._keyQueryTimeout = setTimeout(() => {
+                    this._keyQuery = '';
+                    this._keyQueryTimeout = null;
+                }
+                , 400);
+
+                const options = this._options.filter(option => option.innerText.toLowerCase().startsWith(this._keyQuery));
                 if (options.length) {
                     const option = options[0];
                     this._highlightOption(option);
-                    option.scrollIntoView({ block: 'nearest' });
+
+                    if (!this._isOpen) {
+                        option.select();
+                    } else {
+                        
+                        option.scrollIntoView({ block: 'nearest' });
+                    }
                 }
             }
 

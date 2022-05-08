@@ -7,7 +7,7 @@ const parseHTML = require('./parseHTML.module').parseHTML;
 const parseJs = require('./parseJs.module').parseJs;
 const { copyAsset, deleteAsset } = require('./utils.module');
 
-const folder = process.argv[1].replace('index.js', '');
+const folder = process.argv[1].replace('node-scripts/index.js', '');
 const srcFolder = folder + 'src';
 
 // start file change watchers

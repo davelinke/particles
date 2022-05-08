@@ -1,5 +1,5 @@
 import Ptc from '../ptc/ptc.js'
-import styles from './ptc-card.css.js';
+import styles from './ptc-card.scss';
 
 class ParticleCard extends Ptc {
 

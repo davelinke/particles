@@ -3,12 +3,14 @@ const fs = require('fs');
 const { ensureDirectoryExistence } = require('./utils.module');
 const { minify: minifyJs } = require("terser");
 const path = require('path');
-const { copyAsset } = require('./utils.module');
+// const { copyAsset } = require('./utils.module');
 const { ESLint } = require("eslint");
 
 module.exports.parseJs = async (p, compress = false) => {
     const outFileName = p.replace('src/', 'dist/');
     const eslint = new ESLint();
+
+    console.log('parsin js')
 
     try {
         if (!compress) {
@@ -25,8 +27,19 @@ module.exports.parseJs = async (p, compress = false) => {
                         // console.log(result);
                     }
                 });
+
+                // change SCSS for the actual js
+                js = js.split('.scss').join('.css.js');
+
+                // write file in destination
+                ensureDirectoryExistence(outFileName);
+                fs.writeFile(outFileName, js, err => {
+                    if (err) {
+                        console.error(err);
+                        return
+                    }
+                });
             });
-            return copyAsset(p);
         }
 
         compress && fs.readFile(p, 'utf8', async (err, js) => {
@@ -57,8 +70,14 @@ module.exports.parseJs = async (p, compress = false) => {
                     url: filename + '.map'
                 }
             }
+
+            // change SCSS for the actual js
+            js = js.split('.scss').join('.css.js');
+
+            // compress
             const compressedJs = await minifyJs(js, minifyOptions);
             
+            // write file in destination
             ensureDirectoryExistence(outFileName);
 
             fs.writeFile(outFileName, compressedJs.code, err => {

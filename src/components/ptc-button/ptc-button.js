@@ -1,5 +1,5 @@
 import Ptc from '../ptc/ptc.js'
-import styles from './ptc-button.css.js';
+import styles from './ptc-button.scss';
 
 class PtcButton extends Ptc {
 

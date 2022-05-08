@@ -13,7 +13,7 @@ The **node-scripts** folder where there are a few scripts that take care of stre
 
 If you want to use the compliled components **dist** is where you get them.
 
-If you want to modify them run this repo locally and put your hands to work on the src folder.
+If you want to modify them run this repo locally and put your hands to work on the **src** folder.
 
 I hope you find this simplistic approach useful.
 
