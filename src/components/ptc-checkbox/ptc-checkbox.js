@@ -1,5 +1,5 @@
 import Ptc from '../ptc/ptc.js'
-import styles from './ptc-checkbox.css.js';
+import styles from './ptc-checkbox.scss';
 
 class ParticleCheckbox extends Ptc {
 

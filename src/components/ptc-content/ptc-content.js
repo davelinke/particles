@@ -1,5 +1,5 @@
 import Ptc from '../ptc/ptc.js'
-import styles from './ptc-content.css.js';
+import styles from './ptc-content.scss';
 
 class ParticleContent extends Ptc {
 

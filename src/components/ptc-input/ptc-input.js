@@ -1,5 +1,5 @@
 import Ptc from '../ptc/ptc.js'
-import styles from './ptc-input.css.js';
+import styles from './ptc-input.scss';
 
 class PtcInput extends Ptc {
 
