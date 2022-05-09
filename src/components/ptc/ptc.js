@@ -1,3 +1,7 @@
+/**
+ * Class with the base functionality for all PTC components.
+ * @extends HTMLElement
+ */
 class Ptc extends HTMLElement {
     _props = {};
 
@@ -6,12 +10,15 @@ class Ptc extends HTMLElement {
     * we essentially execute the onAttrChange function defined in the properties
     * so that we have a standardized way of doing it
     */
-    attributeChangedCallback(name, oldValue, newValue) {
-        this._props[name] && this._props[name].onAttrChange && this._props[name].onAttrChange(newValue, oldValue);
-    }
+    // attributeChangedCallback(name, oldValue, newValue) {
+    //     this._props[name] && this._props[name].onAttrChange && this._props[name].onAttrChange(newValue, oldValue);
+    // }
 
     /**
-    * A private method for creating the style tag within the shadow dom
+    * @property {function} _setupStyleElement - A private method for creating the style tag within the shadow dom
+    * @param {string} stylesCss - The css to be injected into the style tag
+    * @returns {string} - The css to be injected into the style tag
+    * @private
     */
     _setupStyleElement(stylesCss) {
         const styles = document.createElement('style');
@@ -20,7 +27,10 @@ class Ptc extends HTMLElement {
     }
 
     /**
-    * A private method that initializes all the properties passed to this function on the componet initialization.
+    * @property {function} _initProps - A private method that initializes all the properties passed to this function on the componet initialization.
+    * @param {array} propsArray - An array of objects with the properties to be initialized
+    * @returns {void}
+    * @private
     */
     _initProps(propsArray) {
         const defaultPropValues = {
@@ -42,7 +52,13 @@ class Ptc extends HTMLElement {
     }
 
     /**
-    * A method to initialize a component getter setter property
+    * @property {function} _initProp - A method to initialize a component getter setter property
+    * @param {string} name - The name of the property
+    * @param {string} defaultValue - The default value of the property
+    * @param {string} type - The type of the property
+    * @param {function} onAttrChange - The function to be called when the property is changed
+    * @returns {void}
+    * @private
     */
     _initProp(name, defaultValue, type, onAttrChange) {
 
@@ -70,14 +86,22 @@ class Ptc extends HTMLElement {
     }
 
     /**
-    * the standardized method to fet a property value
+    * @property {function} _getProp - The standardized method to fet a property value
+    * @param {string} name - The name of the property
+    * @returns {any} - The value of the property
+    * @private
     */
     _getProp(name) {
         return this._props[name].value;
     }
 
     /**
-    * the standardized method to set a property value
+    * @property {function} _setProp - The standardized method to set a property value
+    * @param {string} name - The name of the property
+    * @param {any} value - The value of the property
+    * @param {boolean} fromAttribute - A flag to validate if the modification comes from an attribute change
+    * @returns {any} - The value of the property
+    * @private
     */
     _setProp(name, val, fromAttribute) {
         const type = this._props[name].type;

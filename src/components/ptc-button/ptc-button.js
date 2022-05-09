@@ -1,15 +1,38 @@
 import Ptc from '../ptc/ptc.js'
 import styles from './ptc-button.scss';
 
+/** 
+ * Class for Button Custom Element.
+ * 
+ * @element ptc-button
+ * 
+ * @attr {completion|primary|secondary|text} [variant] - The variant of the button.
+ * @attr {string} [href] - The href of the button.
+ * @attr {string} [target] - The target of the link.
+ * @attr {Boolean} [disabled] - The disabled state of the button.
+ * @attr {0|1|2|3} [elevation] - The elevation of the button.
+ * 
+ * @slot - The content of the button.
+ * 
+ * @cssprop {string} --background-color - The background color of the button when the variant is completion.
+ * 
+ * @alias PtcButton
+ * @extends Ptc 
+ * @hideconstructor
+ * @customElement
+ * 
+ * @example
+ * <ptc-button variant="primary">Button</ptc-button>
+ * */
 class PtcButton extends Ptc {
 
     /**
-     * button attributes to be observed 
+     * @ Button attributes to be observed 
      */
     static get observedAttributes() { return ['variant', 'href', 'target', 'disabled', 'elevation'] }
 
     /**
-     * the button constructor
+     * Constructor of {@link PtcButton}
      */
     constructor() {
         super();
@@ -106,14 +129,19 @@ class PtcButton extends Ptc {
     }
 
     /**
-     * a function to toggle the aria-disabled attribute (accessibilty) 
+     * @property {Function} _toggleAriaDisabled -  A function to toggle the aria-disabled attribute (accessibilty)
+     * @returns {void}
+     * @private
      */
     _toggleAriaDisabled() {
         this.setAttribute('aria-disabled', this.hasAttribute('disabled'));
     }
 
     /**
-     * a function to handle the button click mouse, touch or keyboard
+     * @property {Function} _handleClick - A function to handle the button click mouse, touch or keyboard
+     * @param {Event} e - The event click object
+     * @returns {void}
+     * @private
      */
     _handleClick(e) {
         const isKeyDown = (e.type === 'keydown');

@@ -1,5 +1,10 @@
-# Particles
+<!-- ⚠️ This README has been generated from the file(s) "blueprint.md" ⚠️-->
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#-pkgname-)
+
+# ➤ particles
 A minimal ES6 web component library
+
+This is version 1.0.0
 
 When creating web applications oftentimes there are many decisions in terms of the frameworks to bundle with your project to make it easier and mor straightforward to achieve consistency around a specified architecture.
 
@@ -17,7 +22,10 @@ If you want to modify them run this repo locally and put your hands to work on t
 
 I hope you find this simplistic approach useful.
 
-## Run it locally
+
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#run-it-locally)
+
+## ➤ Run it locally
 Download/clone the repo
 
     - npm install
