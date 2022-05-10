@@ -29,7 +29,30 @@ class PtcButton extends Ptc {
     /**
      * @ Button attributes to be observed 
      */
-    static get observedAttributes() { return ['variant', 'href', 'target', 'disabled', 'elevation'] }
+    static get observedAttributes() {
+        return [
+            /**
+             * The Variant of the button
+             */
+            'variant',
+            /**
+             * The link URL if the button behave like a link
+             */
+            'href',
+            /**
+             * The linking target if the button behave like a link
+             */
+            'target',
+            /**
+             * the disabled attribute
+             */
+            'disabled',
+            /**
+             * The visual elevation (shading) of the button
+             */
+            'elevation'
+        ]
+    }
 
     /**
      * Constructor of {@link PtcButton}
