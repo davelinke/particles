@@ -38,6 +38,9 @@ chokidar.watch(srcFolder).on('all', (event, p) => {
             case ('.css'):
                 parseCSS(p);
                 break;
+            case('.md'):
+                // do nothing
+                break;
             default:
                 copyAsset(p);
         }
