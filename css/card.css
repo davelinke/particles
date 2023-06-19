@@ -1,0 +1,24 @@
+.card {
+    --background-color: var(--ptc-color__light);
+    --color: var(--ptc-color__text);
+    --border-radius: var(--ptc-border__radius--none);
+    --padding-inline: var(--ptc-spacing--none);
+    --padding-block: var(--ptc-spacing--none);
+    --margin-inline: var(--ptc-spacing--none);
+    --margin-block: var(--ptc-spacing--none);
+    display: inline-block;
+
+    background-color: var(--background-color);
+    color: var(--color);
+    border-radius: var(--border-radius);
+    padding-inline: var(--padding-inline);
+    padding-block: var(--padding-block);
+    margin-inline: var(--margin-inline);
+    margin-block: var(--margin-block);
+}
+
+.card:not(.elevation-1):not(.elevation-2):not(.elevation-3) {
+    border-width: var(--ptc-border__width--thin);
+    border-color: var(--ptc-color__border);
+    border-style: var(--ptc-border__style--solid);
+}

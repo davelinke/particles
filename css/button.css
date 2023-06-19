@@ -1,0 +1,152 @@
+button {
+    --background-color: var(--ptc-color__primary);
+    --color: var(--ptc-color__light);
+    --border-color: var(--ptc-color__primary);
+    --border-width: var(--ptc-border__width--thin);
+    --border-style: var(--ptc-border__style--solid);
+    --border-radius: var(--ptc-border__radius--none);
+    --padding-inline: var(--ptc-spacing--medium);
+    --padding-block: var(--ptc-spacing--small);
+    --font-weight: var(--ptc-text__weight--bold);
+    --font-size: var(--ptc-text__size--medium);
+    --white-space: var(--ptc-text__wrap--none);
+    --opacity: var(--ptc-opacity__full);
+
+    background-color: var(--background-color);
+    color: var(--color);
+    padding-inline: var(--padding-inline);
+    padding-block: var(--padding-block);
+    font-weight: var(--font-weight);
+    font-size: var(--font-size);
+    border-color: var(--border-color);
+    border-width: var(--border-width);
+    border-style: var(--border-style);
+    border-radius: var(--border-radius);
+    white-space: var(--white-space);
+    opacity: var(--opacity);
+
+    outline: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    user-select: none;
+}
+
+button:active {
+    --background-color: var(--ptc-color__primary--dark);
+    --border-color: var(--ptc-color__primary--dark);
+}
+
+button:focus {
+    --background-color: var(--ptc-color__primary--light);
+    --border-color: var(--ptc-color__primary--light);
+}
+
+button[disabled],
+button[disabled]:focus {
+    --background-color: var(--ptc-color__disabled);
+    --border-color: var(--ptc-color__disabled);
+
+    pointer-events: none;
+    cursor: not-allowed
+}
+
+button.completion {
+    --background-color: var(--ptc-color__succcess);
+    --border-color: var(--ptc-color__succcess)
+}
+
+button.completion:active {
+    --background-color: var(--ptc-color__succcess--dark);
+    --border-color: var(--ptc-color__succcess--dark)
+}
+
+button.completion:focus {
+    --background-color: var(--ptc-color__succcess--light);
+    --border-color: var(--ptc-color__succcess--light)
+}
+
+button.secondary {
+    --background-color: var(--ptc-color__light);
+    --color: var(--ptc-color__primary);
+    --border-color: var(--ptc-color__primary);
+}
+
+button.secondary[disabled],
+button.secondary[disabled]:focus {
+    --border-color: var(--ptc-color__disabled);
+    --color: var(--ptc-color__disabled);
+}
+
+button.secondary:active {
+    --color: var(--ptc-color__primary--dark);
+}
+
+button.secondary:focus {
+    color: var(--ptc-button-secondary__color--selected, var(--ptc-color-success__color--selected, #2b9eb8));
+    border-color: var(--ptc-button-secondary__border-color--selected, var(--ptc-color-success__border-color--selected, #2b9eb8));
+    background-color: var(--ptc-button-secondary__background-color--selected, var(--ptc-color-success__background-color--selected, #fff))
+}
+
+button.text {
+    --color: var(--ptc-color__primary);
+    --padding-inline: var(--ptc-spacing--none);
+    --padding-block: var(--ptc-spacing--none);
+    border: none;
+    background: none;
+    box-shadow: none !important;
+}
+
+button.text[disabled] {
+    --color: var(--ptc-color__disabled);
+}
+
+button.text.active {
+    --color: var(--ptc-color__primary--dark);
+}
+
+button.text:focus {
+    --color: var(--ptc-color__primary--light);
+}
+
+@media(hover: hover) {
+    button:hover {
+        --background-color: var(--ptc-color__primary--light);
+        --border-color: var(--ptc-color__primary--light);
+    }
+
+    button:hover:active {
+        --background-color: var(--ptc-color__primary--dark);
+        --border-color: var(--ptc-color__primary--dark);
+    }
+
+    button.completion:hover {
+        --background-color: var(--ptc-color__succcess--light);
+        --border-color: var(--ptc-color__succcess--light);
+    }
+
+    button.completion:hover:active {
+        --background-color: var(--ptc-color__succcess--dark);
+        --border-color: var(--ptc-color__succcess--dark);
+    }
+
+    button.secondary:hover {
+        --color: var(--ptc-color__primary--light);
+        --border-color: var(--ptc-color__primary--light);
+        --background-color: var(--ptc-color__light)
+    }
+
+    button.secondary:hover:active {
+        --color: var(--ptc-color__primary--dark);
+        --border-color: var(--ptc-color__primary--dark);
+    }
+
+    button.text:hover {
+        --color: var(--ptc-color__primary--light);
+        --background: var(--ptc-color__primary--light);
+    }
+
+    button.text:hover:active {
+        --color: var(--ptc-color__primary--dark);
+    }
+}

@@ -1,0 +1,11 @@
+.elevation-1 {
+    box-shadow: var(--ptc-elevation__one--shadow-horizontal) var(--ptc-elevation__one--shadow-vertical) var(--ptc-elevation__one--shadow-blur) var(--ptc-color__shadow)
+}
+
+.elevation-2 {
+    box-shadow: var(--ptc-elevation__two--shadow-horizontal) var(--ptc-elevation__two--shadow-vertical) var(--ptc-elevation__two--shadow-blur) var(--ptc-color__shadow)
+}
+
+.elevation-3 {
+    box-shadow: var(--ptc-elevation__three--shadow-horizontal) var(--ptc-elevation__three--shadow-vertical) var(--ptc-elevation__three--shadow-blur) var(--ptc-color__shadow)
+}
