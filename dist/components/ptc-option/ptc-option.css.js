@@ -1,1 +1,0 @@
-export default `*{-webkit-font-smoothing:antialiased}:host{display:block;padding:.625rem .5rem;box-sizing:border-box;cursor:pointer}:host([highlighted]){background-color:var(--ptc-select-option__background-color--hover, var(--ptc-highlighted__background-color--hover, rgba(43, 158, 184, 0.133)))}`
